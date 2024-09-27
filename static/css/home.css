@@ -1,0 +1,46 @@
+#home_body{
+    background-color: rgba(224, 242, 242, 0.433);
+}
+
+#home_main{
+    width: 590px;
+    height: 500px;
+    position: relative;
+    left: 40px;
+    top: 70px;
+}
+#home_h1{
+    font-size: 46px;
+    color:black;
+}
+
+#home_img{
+    width: 800px;
+}
+
+
+#home_image{
+    position: relative;
+    left: 850px;
+    bottom: 480px;
+    width: 600px;
+}
+
+#home_buttons{
+    height: 100px;
+
+}
+
+.home_button{
+    border: none;
+    background-color: #7569b65e;
+    margin-left: 20px;
+    margin-right: 20px;
+    width: 140px;
+    height: 38px;
+    border-radius: 5px;
+}
+
+.home_button:hover{
+    background-color: #7569b6e2;
+}

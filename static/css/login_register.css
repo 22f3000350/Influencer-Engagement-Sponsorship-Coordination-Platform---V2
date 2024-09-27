@@ -1,0 +1,93 @@
+#image_section{
+    width: 1050px;
+    height: 750px;
+}
+
+#login_section{
+    position: relative;
+    left: 1150px;
+    bottom: 810px;
+    width: 400px;
+    height: 700px;
+}
+
+#img{
+    width: 1050px;
+    height: 760px;
+}
+
+#login_form{
+    position: relative;
+    left: 1090px;
+    bottom: 600px;
+    width: 500px;
+    height: 600px;
+}
+
+#exampleInputEmail1{
+    height: 50px;
+    width: 450px;
+    margin-left: 30px;
+}
+
+#exampleInputPassword1{
+    height: 50px;
+    width: 450px;
+    margin-left: 30px;
+}
+
+
+#login_btn{
+    background-color: rgba(117, 67, 224, 0.844);
+    color: white;
+    width: 450px;
+    height: 50px;
+    border: none;
+    border-radius: 8px;
+    margin-left: 30px;
+}
+
+span{
+    position: relative;
+    left: 100px;
+}
+
+#register_form{
+    position: relative;
+    left: 1090px;
+    bottom: 700px;
+    width: 500px;
+    height: 600px;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+#register_form::-webkit-scrollbar{
+    display: none;
+}
+
+label{
+    position: relative;
+    margin-left: 40px;
+}
+
+p{
+    margin-left: 40px;
+}
+
+#floatingTextarea{
+    width: 450px;
+    height: 100px;
+    margin-left: 30px;
+}
+
+#message{
+    background-color: rgba(235, 90, 90, 0.238);
+    width: 450px;
+    height: 55px;
+    border: 1px solid rgba(235, 90, 90, 0.173);
+    border-radius: 8px;
+    position: relative;
+    bottom: 30px;
+    left: 30px;
+}
