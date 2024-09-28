@@ -1,4 +1,20 @@
 export default {
+    data: function(){
+        return {
+            type: this.$route.params.type,
+            user:{
+                email:'',
+                password:''
+            }
+        }
+    },
+    methods:{
+        login: function(){
+            console.log(this.user.email);
+            console.log(this.user.password);
+            this.$router.push('/')
+        }
+    },
     template:`
         <div>
             <nav class="navbar bg-body-tertiary">
@@ -12,25 +28,32 @@ export default {
             </nav>
 
             <div id="image_section">
-                <img src="/static/images/login_image.jpg" id="img">
+                <img src="/static/images/login_image.jpg" id="login_img">
             </div>
 
             <div id="login_form">
 
                 <h1 align="center">Login</h1>
 
-                <form method="post">
+                <form>
                     <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label"></label>
-                    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter your Username" name="username" required>
+                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter your Email" v-model="user.email" required>
                     </div>
                     <div class="mb-3">
                     <label for="exampleInputPassword1" class="form-label"></label>
-                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Enter your Password" name="password" required>
+                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Enter your Password" v-model="user.password" required>
                     </div>
                     <br>
-                    <input type="submit" id="login_btn" value="Login">
+                    <input type="submit" id="login_btn" value="Login" @click="login">
                 </form>
+                <br><br>
+                <div v-if="type === 'sponsor'">
+                    <span><b>Don't have an account? </b><router-link to="/sponsor_register">Register Now</router-link></span>
+                </div>
+                <div v-if="type === 'influencer'">
+                    <span><b>Don't have an account? </b><router-link to="/influencer_register">Register Now</router-link></span>
+                </div>
 
             </div>
 
