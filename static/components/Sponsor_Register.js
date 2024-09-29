@@ -3,17 +3,37 @@ export default {
         return {
             sponsor:{
                 email:'',
+                username:'',
                 password:'',
                 company:'',
                 contact_info:'',
                 budget:''
-            }
+            },
+            message:''
         }
     },
     methods:{
         register: function(){
-            console.log(this.sponsor)
-            this.$router.push('/')
+            fetch('/sponsor_register',{
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(this.sponsor)
+            })
+            .then((res) => {
+                console.log("Working")
+                return res.json()
+            })
+            .then((data) => {
+                if(data.message === 'ok'){
+                    this.$router.push('/')
+                }
+                else{
+                    console.log("Working")
+                    this.message=data.message
+                }
+            })
         }
     },
     template:`
@@ -34,14 +54,22 @@ export default {
 
             <div id="register_form">
 
+                 <div id="message" v-if="message != ''" style="margin-top: 35px;">
+                    <p style="margin-top: 10px; font-size: 17px; color: red;">{{message}}</p>
+                </div>
+
                 <h1 align="center">Register</h1>
 
                 <br>
 
-                <form>
+                <form @submit="register" >
+                    <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Enter your Email</label>
+                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" v-model="sponsor.email" required>
+                    </div>
                     <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label">Enter your Username</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" v-model="sponsor.email" required>
+                    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" v-model="sponsor.username" required>
                     </div>
                     <div class="mb-3">
                     <label for="exampleInputPassword1" class="form-label">Enter your Password</label>
@@ -60,7 +88,7 @@ export default {
                         <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" v-model="sponsor.budget" required>
                     </div>
                     <br>
-                    <input type="submit" id="login_btn" value="Register" @click="register">
+                    <input type="submit" id="login_btn" value="Register">
                 </form>
                 <br><br>
                 <span><b>Already have an account? </b><router-link to="/login/sponsor">Login Now</router-link></span>

@@ -16,7 +16,7 @@ with app.app_context():
     app.security.datastore.find_or_create_role(name="sponsor",description="This is sponsor")
     app.security.datastore.find_or_create_role(name="influencer",description="This is influencer")
     if not app.security.datastore.find_user(email="admin123@gmail.com"):
-        app.security.datastore.create_user(email="admin123@gmail.com",password=hash_password('1234'),roles=['admin'])
+        app.security.datastore.create_user(email="admin123@gmail.com",username="admin",password=hash_password('1234'),roles=['admin'])
     
     db.session.commit()
 

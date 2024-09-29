@@ -3,6 +3,7 @@ export default {
         return {
             influencer:{
                 email:'',
+                username:'',
                 password:'',
                 category:'',
                 niche:'',
@@ -39,10 +40,14 @@ export default {
 
                 <br>
 
-                <form>
+                <form @submit="register">
+                    <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Enter your Email</label>
+                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" v-model="influencer.email" required>
+                    </div>
                     <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label">Enter your Username</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" v-model="influencer.email" required>
+                    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" v-model="influencer.username" required>
                     </div>
                     <div class="mb-3">
                     <label for="exampleInputPassword1" class="form-label">Enter your Password</label>
@@ -74,7 +79,7 @@ export default {
                         <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" v-model="influencer.followers" required>
                     </div>
                     <br>
-                    <input type="submit" id="login_btn" value="Register" @click="register">
+                    <input type="submit" id="login_btn" value="Register">
                 </form>
                 <br>
                 <span><b>Already have an account? </b><router-link to="/login/influencer">Login Now</router-link></span>
