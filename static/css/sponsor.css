@@ -1,0 +1,302 @@
+#header{
+    border: 1px solid rgba(211, 219, 227, 0.882) ;
+    width: 1700px ;
+    height: 70px;
+    position: relative;
+    right: 7px;
+    bottom: 7px;
+}
+
+#sidebar{
+    width: 280px;
+    height: 721px;
+    position: relative;
+    bottom: 7px;
+    right: 7px;
+}
+
+#main{
+    background-color: #ebf0f8;
+    width: 1383px;
+    height: 719px;
+    position: relative;
+    left: 295px;
+    bottom: 730px;
+    overflow-y: auto;
+}
+
+#main::-webkit-scrollbar{
+    display: none;
+}
+
+#icon{
+    margin: 5px;
+}
+#icon_text{
+    color: black;
+    font-size: 45px;
+    margin: 2px;
+    margin-left: 20px;
+}
+
+
+
+#logout{
+    background-color: white;
+    color: #7F27FF;
+    font-size: 17px;
+    width: 120px;
+    height: 40px;
+    border: 1px solid #7F27FF;
+    border-radius: 6px;
+    position: relative;
+    left: 1520px;
+    bottom: 48px;
+}
+
+#logout:hover{
+    background-color: #641ad2bc;
+    color: white;
+}
+
+.button{
+    font-size: 17px;
+    background-color: white;
+    color: #5c6477;
+    border: none;
+    border-radius: 10px;
+    width: 240px;
+    height: 45px;
+    margin: 14px;
+    margin-left: 30px;
+}
+
+.side_heading{
+    color: #6E7891;
+    font-size: 18px;
+    margin-left: 30px;
+}
+
+
+#new_campaign_heading{
+    position: relative;
+    margin-left: 70px;
+    margin-top: 40px;
+    font-size: 40px;
+}
+
+#new_campaign_form{
+    height: 550px;
+    width: 878px;
+    margin-left: 70px;
+}
+
+#new_campaign_name{
+    height: 50px;
+    width: 600px;
+}
+
+#new_campaign_budget{
+    height: 50px;
+    width: 250px;
+}
+
+#new_campaign_type{
+    height: 50px;
+    width: 250px;
+}
+
+#new_campaign_category{
+    height: 50px;
+    width: 600px;
+}
+
+#new_campaign_start_date{
+    height: 50px;
+    width: 250px;
+}
+
+#new_campaign_end_date{
+    height: 50px;
+    width: 250px;
+}
+
+
+#new_campaign_create{
+    width: 240px;
+    height: 45px;
+    margin: 14px;
+    margin-left: 20px;
+    
+}
+
+#update_campaign_table{
+    background-color: white;
+    margin-top: 50px;
+    height: 550px;
+    width: 1377px;
+    margin-left: 2px;
+    overflow-y: auto;
+}
+
+#update_campaign_table::-webkit-scrollbar{
+    display: none;
+}
+
+#campaign_table{
+    margin: 20px;
+}
+
+#campaign_table::-webkit-scrollbar{
+    display: none;
+}
+
+th{
+    width: 10px;
+    height: 20px;
+    
+}
+
+td{
+    width: 10px;
+    height: 70px;
+    vertical-align: middle;
+}
+
+#update_campaign_heading{
+    margin-left: 70px;
+    margin-top: 40px;
+    font-size: 40px;
+}
+
+.new_ad_button{
+    background-color: #e6ddf3bf;
+    border: none;
+    height: 50px;
+    width: 150px;
+    
+}
+
+#new_ad_content{
+    margin-left: 30px;
+    margin-top: 25px;
+    width: 1340px;
+    height: 550px;
+    overflow-y: auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+}
+
+#new_ad_content::-webkit-scrollbar{
+    display: none;
+}
+
+.new_ad_card{
+    background-color: white;
+    border: 1px solid  rgb(211, 224, 240) ;
+    border-radius: 5px;
+    width: 280px;
+    height: 450px;
+    margin-left: 10px;
+
+}
+
+#new_ad_request_button{
+    border: 1px solid blueviolet;
+    background-color: white;
+    border-radius: 5px;
+    height: 45px;
+    width: 180px;
+    margin-top: 7px;
+    margin-left: 40px;
+}
+
+#new_ad_request_button:hover{
+    border: 1px solid blueviolet;
+    background-color: blueviolet;
+    color: white;
+    border-radius: 5px;
+    height: 45px;
+    width: 180px;
+    margin-top: 7px;
+    margin-left: 40px;
+}
+
+#new_ad_form{
+    width: 650px;
+    height: 500px;
+    margin-left: 30px;
+    margin-top: 30px;
+}
+
+.sponsor_requests_card{
+    background-color: white;
+    border: 1px solid  rgb(211, 224, 240) ;
+    border-radius: 5px;
+    width: 600px;
+    height: 300px;
+    margin-left: 10px;
+
+}
+
+#home_campaign_table{
+    background-color: white;
+    border-radius: 10px;
+    position: relative;
+    bottom: 460px;
+    left: 760px;
+    width: 600px;
+    height: 450px;
+    padding: 0px;
+    overflow-y: auto;
+}
+
+#home_campaign_table::-webkit-scrollbar{
+    display: none;
+}
+
+#home_content{
+    
+    border-radius: 10px;
+    margin-top: 20px;
+    margin-left: 20px;
+    width: 700px;
+    height: 450px;
+}
+
+#home_campaign_content{
+    width: 570px;
+    height: 420px;
+    position: relative;
+    top: 15px;
+    left: 15px;
+}
+
+#filter{
+    width: 150px;
+    height: 50px;
+    position: relative;
+    right: 170px;
+    top: 50px;
+}
+
+#search_bar{
+    width: 300px;
+    height: 80px;
+    position: relative;
+    left: 860px;
+    bottom: 100px;
+
+}
+
+#search{
+    background-color: #7F27FF;
+    border:#7F27FF;
+    width: 150px;
+    height: 45px;
+    position: relative;
+    left: 310px;
+    bottom: 48px;
+}
+
