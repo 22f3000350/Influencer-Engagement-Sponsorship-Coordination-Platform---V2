@@ -9,13 +9,39 @@ export default {
                 niche:'',
                 platform:'',
                 followers:''
-            }
+            },
+            message:''
         }
     },
     methods:{
         register: function(){
-            console.log(this.influencer)
-            this.$router.push('/')
+            event.preventDefault(); 
+            const form = this.$refs.myForm;
+
+            if(form.checkValidity()){
+                fetch('/influencer_register',{
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(this.influencer)
+                })
+                .then((res) => {
+                    return res.json()
+                })
+                .then((data) => {
+                    if(data.message === 'ok'){
+                        this.$router.push('/login/influencer')
+                    }
+                    else{
+                        this.message=data.message
+                    }
+                })
+            }
+            else{
+                form.reportValidity();
+            }         
+            
         }
     },
     template:`
@@ -36,11 +62,15 @@ export default {
 
             <div id="register_form">
 
+                <div id="message" v-if="message != ''" style="margin-top: 35px;">
+                    <p style="margin-top: 10px; font-size: 17px; color: red;">{{message}}</p>
+                </div>
+
                 <h1 align="center">Register</h1>
 
                 <br>
 
-                <form @submit="register">
+                <form ref="myForm">
                     <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label">Enter your Email</label>
                     <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" v-model="influencer.email" required>
@@ -71,7 +101,7 @@ export default {
                         <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" v-model="influencer.niche" required>
                     </div>
                     <div class="mb-3">
-                        <label for="exampleInputEmail1" class="form-label">Enter number of Platform</label>
+                        <label for="exampleInputEmail1" class="form-label">Enter your of Platform</label>
                         <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" v-model="influencer.platform" required>
                     </div>
                     <div class="mb-3">
@@ -79,7 +109,7 @@ export default {
                         <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" v-model="influencer.followers" required>
                     </div>
                     <br>
-                    <input type="submit" id="login_btn" value="Register">
+                    <button id="login_btn" @click="register">Register</button>
                 </form>
                 <br>
                 <span><b>Already have an account? </b><router-link to="/login/influencer">Login Now</router-link></span>

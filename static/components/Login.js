@@ -4,15 +4,41 @@ export default {
             type: this.$route.params.type,
             user:{
                 email:'',
-                password:''
-            }
+                password:'',
+                role: this.$route.params.type
+            },
+            message:''
         }
     },
     methods:{
         login: function(){
-            console.log(this.user.email);
-            console.log(this.user.password);
-            this.$router.push('/')
+            
+            event.preventDefault(); 
+            const form = this.$refs.myForm;
+
+            if(form.checkValidity()){
+                fetch('/user-login',{
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(this.user)
+                })
+                .then((res) => {
+                    return res.json()
+                })
+                .then((data) => {
+                    if(data.message === 'ok'){
+                        this.$router.push('/')
+                    }
+                    else{
+                        this.message=data.message
+                    }
+                })
+            }
+            else{
+                form.reportValidity();
+            }         
         }
     },
     template:`
@@ -33,9 +59,13 @@ export default {
 
             <div id="login_form">
 
+                <div id="message" v-if="message != ''" style="margin-top: 35px;">
+                    <p style="margin-top: 10px; font-size: 17px; color: red;">{{message}}</p>
+                </div>
+
                 <h1 align="center">Login</h1>
 
-                <form>
+                <form ref="myForm">
                     <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label"></label>
                     <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter your Email" v-model="user.email" required>
@@ -45,7 +75,7 @@ export default {
                     <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Enter your Password" v-model="user.password" required>
                     </div>
                     <br>
-                    <input type="submit" id="login_btn" value="Login" @click="login">
+                    <button id="login_btn" @click="login">Login</button>
                 </form>
                 <br><br>
                 <div v-if="type === 'sponsor'">

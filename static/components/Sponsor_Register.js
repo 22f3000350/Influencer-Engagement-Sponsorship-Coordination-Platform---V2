@@ -14,26 +14,34 @@ export default {
     },
     methods:{
         register: function(){
-            fetch('/sponsor_register',{
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(this.sponsor)
-            })
-            .then((res) => {
-                console.log("Working")
-                return res.json()
-            })
-            .then((data) => {
-                if(data.message === 'ok'){
-                    this.$router.push('/')
-                }
-                else{
-                    console.log("Working")
-                    this.message=data.message
-                }
-            })
+
+            event.preventDefault(); 
+            const form = this.$refs.myForm;
+
+            if(form.checkValidity()){
+                fetch('/sponsor_register',{
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(this.sponsor)
+                })
+                .then((res) => {
+                    return res.json()
+                })
+                .then((data) => {
+                    if(data.message === 'ok'){
+                        this.$router.push('/login/sponsor')
+                    }
+                    else{
+                        this.message=data.message
+                    }
+                })
+            }
+            else{
+                form.reportValidity();
+            }         
+            
         }
     },
     template:`
@@ -62,7 +70,7 @@ export default {
 
                 <br>
 
-                <form @submit="register" >
+                <form ref="myForm">
                     <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label">Enter your Email</label>
                     <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" v-model="sponsor.email" required>
@@ -88,7 +96,7 @@ export default {
                         <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" v-model="sponsor.budget" required>
                     </div>
                     <br>
-                    <input type="submit" id="login_btn" value="Register">
+                    <button id="login_btn" @click="register">Register</button>
                 </form>
                 <br><br>
                 <span><b>Already have an account? </b><router-link to="/login/sponsor">Login Now</router-link></span>
