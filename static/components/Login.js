@@ -29,7 +29,10 @@ export default {
                 })
                 .then((data) => {
                     if(data.message === 'ok'){
-                        this.$router.push('/')
+                        localStorage.setItem('token', data.token)
+                        if(data.role=="sponsor"){
+                            this.$router.push({name:'Sponsor_Home',params:{'sponsor_id':data.id}})
+                        }
                     }
                     else{
                         this.message=data.message

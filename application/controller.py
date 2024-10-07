@@ -19,7 +19,15 @@ def login():
     if user:
         if verify_password(password, user.password):
             if user.roles[0].name == role:
-                return {"message":"ok","token":user.get_auth_token(),"role":role},201
+                if role=="sponsor":
+                    sponsor = Sponsor.query.filter_by(name=user.username).first()
+                    return {"message":"ok","token":user.get_auth_token(),"role":role,"id":sponsor.id},201
+                elif role=="influencer":
+                    influencer = Influencer.query.filter_by(name=user.username).first()
+                    return {"message":"ok","token":user.get_auth_token(),"role":role,"id":influencer.id},201
+                elif role=="Admin":
+                    return {"message":"ok","token":user.get_auth_token(),"role":role},201
+
             else:
                 return {"message":"Incorrect Role"},201
         else:

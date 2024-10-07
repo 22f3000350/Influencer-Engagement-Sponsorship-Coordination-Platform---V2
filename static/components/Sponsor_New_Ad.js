@@ -5,7 +5,7 @@ export default {
         Sponsor_Base:Sponsor_Base
     },
     template:`
-        <Sponsor_Base new_ad="background-color: blueviolet; color: white;margin-top: 25px;">
+        <Sponsor_Base new_ad="background-color: blueviolet; color: white;margin-top: 25px;" :sponsor_id="$route.params.sponsor_id">
             This is new ad
         </Sponsor_Base>
     `
