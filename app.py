@@ -1,11 +1,15 @@
 from flask import Flask
+from flask_cors import CORS
 from config import LocalDevelopmentConfig
 from application.database import *
+from application.resources import *
 from flask_security import Security,SQLAlchemyUserDatastore,hash_password
 
 app = Flask(__name__)
+cors = CORS(app)
 app.config.from_object(LocalDevelopmentConfig)
 db.init_app(app)
+api.init_app(app)
 datastore=SQLAlchemyUserDatastore(db,User,Role)
 app.security=Security(app,datastore)
 app.app_context().push()

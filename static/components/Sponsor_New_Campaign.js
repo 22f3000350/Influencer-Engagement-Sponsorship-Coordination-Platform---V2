@@ -6,7 +6,8 @@ export default {
     },
     data:function(){
         return {
-            campaign:{
+            id: this.$route.params.sponsor_id,
+            campaign: {
                 name:'',
                 budget:'',
                 category:'',
@@ -24,7 +25,34 @@ export default {
             const form = this.$refs.myForm;
 
             if(form.checkValidity()){
-                console.log(this.campaign)
+                fetch('http://127.0.0.1:5000/campaign/new/'+ this.id,{
+                    method:'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authentication-Token': localStorage.getItem('token')
+                    },
+                    body: JSON.stringify(this.campaign)
+                })
+                .then((res) => {
+                    return res.json()
+                })
+                .then((data) => {
+                    if(data.message=="ok"){
+                        alert("Campaign Created Successfully");
+                        this.campaign.name='';
+                        this.campaign.budget='';
+                        this.campaign.category='';
+                        this.campaign.type='';
+                        this.campaign.start_date='';
+                        this.campaign.end_date='';
+                        this.campaign.description='';
+                    }
+                })
+                .catch((err) => {
+                    alert("Campaign name already exists");
+                    this.campaign.name='';
+
+                })
             }
             else{
                 form.reportValidity();
@@ -96,7 +124,6 @@ export default {
                     <button class="btn btn-primary" id="new_campaign_create" @click="create">Create Campaign</button>
 
                     </form>
-
                 </div>
         </Sponsor_Base>
     `
