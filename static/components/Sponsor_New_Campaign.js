@@ -25,7 +25,7 @@ export default {
             const form = this.$refs.myForm;
 
             if(form.checkValidity()){
-                fetch('http://127.0.0.1:5000/campaign/new/'+ this.id,{
+                fetch('http://127.0.0.1:5000/campaign/'+ this.id,{
                     method:'POST',
                     headers: {
                         'Content-Type': 'application/json',
