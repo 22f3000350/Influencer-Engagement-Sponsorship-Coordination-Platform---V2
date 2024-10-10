@@ -82,7 +82,9 @@ export default {
         <Sponsor_Base update_campaign="background-color: blueviolet; color: white;margin-top: 25px;" :sponsor_id="$route.params.sponsor_id">
             <h1 id="update_campaign_heading">Update Campaign</h1>
 
-            <div id="update_campaign_table" v-if="type == 'view'">
+            <h2 align="center" v-if="campaigns.length == 0" >No campaign is available</h2>
+
+            <div id="update_campaign_table" v-if="type == 'view' && campaigns.length>0">
 
                 <div class="table-responsive scrollbar" id="campaign_table">
 
@@ -128,7 +130,7 @@ export default {
                     <input type="text" class="form-control" placeholder="Campaign Name" aria-label="First name" id="new_campaign_name" name="name" disabled>
                     </div>
                     <div class="col">
-                        <input type="text" class="form-control" placeholder="Budget" aria-label="First name" id="new_campaign_budget" v-model="campaign.budget">
+                        <input type="number" class="form-control" placeholder="Budget" aria-label="First name" id="new_campaign_budget" v-model="campaign.budget">
                     </div>
                 </div>
             

@@ -68,6 +68,24 @@ class Campaign_Api(Resource):
         db.session.commit()
 
         return {"message":"ok"},200
+    
+      
+    @auth_required('token')
+    @roles_required('sponsor')
+    def delete(self,sponsor_id,campaign_id):
+        campaign=Campaign.query.filter_by(id=campaign_id).first()
+        ads=Ad.query.filter_by(camp_name=campaign.name).all()
+        for ad in ads:
+            requests=Request.query.filter_by(ad_id=ad.id).all()
+            for request in requests:
+                db.session.delete(request)
+                
+            db.session.delete(ad)
+
+        db.session.delete(campaign)
+        db.session.commit()
+
+        return {"message":"ok"},200
 
 
 
