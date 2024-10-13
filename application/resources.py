@@ -5,6 +5,48 @@ from flask_security import auth_required,roles_required
 
 api = Api()
 
+class Campaign_Info(Resource):
+    @auth_required('token')
+    @roles_required('sponsor')
+    def get(self,sponsor_id):
+        campaigns = Campaign.query.filter_by(sponsor_id=sponsor_id).all()
+        data=[]
+        for campaign in campaigns:
+            c={}
+            c['id']=campaign.id
+            c['name']=campaign.name
+            c['description']=campaign.description
+            c['start_date']=campaign.start_date
+            c['end_date']=campaign.end_date
+            c['budget']=campaign.budget
+            c['type']=campaign.type
+            c['category']=campaign.category
+            c['flag']=campaign.flag
+            c['sponsor_id']=campaign.sponsor_id
+            data.append(c)
+
+        return data,200
+
+
+class Influencer_Info(Resource):
+    @auth_required('token')
+    @roles_required('sponsor')
+    def get(self):
+        influencers = Influencer.query.all()
+        data = []
+        for influencer in influencers:
+            i={}
+            i['id']=influencer.id
+            i['name']=influencer.name
+            i['category']=influencer.category
+            i['niche']=influencer.niche
+            i['platform']=influencer.platform
+            i['followers']=influencer.followers
+            i['flag']=influencer.flag
+            data.append(i)
+
+        return data,200
+
 class Campaign_Api(Resource):
     @auth_required('token')
     @roles_required('sponsor')
@@ -86,7 +128,37 @@ class Campaign_Api(Resource):
         db.session.commit()
 
         return {"message":"ok"},200
+    
+
+class Ad_Api(Resource):
+    def get(self):
+        pass
+
+    def post(self,sponsor_id,type,influencer_id):
+        if influencer_id>0:
+            if type=="private":
+                data = request.get_json()
+                camp_name=data.get("camp_name")
+                payment_amount=data.get("payment_amount")
+                requirements=data.get("requirements")
+                ad=Ad(camp_name=camp_name,requirements=requirements,payment_amount=payment_amount,negotiate_amount=0,status="Pending",flag="False",influencer_id=influencer_id)
+                db.session.add(ad)
+                db.session.commit()
+                return {"message":"ok"}
+            
+        if  type=="public":
+            data = request.get_json()
+            camp_name=data.get("camp_name")
+            payment_amount=data.get("payment_amount")
+            requirements=data.get("requirements")
+            ad=Ad(camp_name=camp_name,requirements=requirements,payment_amount=payment_amount,negotiate_amount=0,status="Pending",flag="False",influencer_id=0)
+            db.session.add(ad)
+            db.session.commit()
+            return {"message":"ok"}
 
 
 
 api.add_resource(Campaign_Api,'/campaign/<int:sponsor_id>','/campaign/<int:sponsor_id>/<int:campaign_id>')
+api.add_resource(Influencer_Info,'/info/influencer')
+api.add_resource(Campaign_Info,'/info/campaign/<int:sponsor_id>')
+api.add_resource(Ad_Api,'/ad/<int:sponsor_id>/<type>/<int:influencer_id>')
