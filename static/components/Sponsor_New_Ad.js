@@ -16,7 +16,12 @@ export default {
                 payment_amount:'',
                 requirements:''
             },
-            influencer_id:0
+            influencer_id:0,
+            categorys:[],
+            find:{
+                category:'',
+                search:''
+            }
         }
     },
     mounted(){
@@ -44,6 +49,19 @@ export default {
         })
         .then((data) => {
             this.campaigns = data
+        })
+
+        
+        fetch('http://127.0.0.1:5000/sponsor_filter',{
+            headers:{
+                'Authentication-Token': localStorage.getItem('token')
+            }
+        })
+        .then((res) => {
+            return res.json()
+        })
+        .then((data) => {
+            this.categorys = data
         })
         
     },
@@ -91,6 +109,26 @@ export default {
             else{
                 form.reportValidity();
             }  
+        },
+
+        filter:function(){
+
+            fetch('http://127.0.0.1:5000/sponsor_filter',{
+                method:'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authentication-Token': localStorage.getItem('token')
+                },
+                body: JSON.stringify(this.find)
+            })
+            .then((res) => {
+                return res.json()
+            })
+            .then((data) => {
+                this.influencers = data
+                this.find.search=''
+            })
+
         }
 
     },
@@ -106,19 +144,17 @@ export default {
                     <button class="new_ad_button" style="position: relative;right: 5px;" @click="change">Public</button>
                     
                         <div id="search_bar" v-if="!form">
-                            <form method="post">
+                            <form>
                                 <div>
-                                    <select class="form-select" aria-label="Default select example" id="filter" name="category">
+                                    <select class="form-select" aria-label="Default select example" id="filter" v-model="find.category">
                                     <option selected value="all">All</option>
-                                    //{% for category in categorys %}
-                                        <option value="">category</option>
-                                    //{% endfor %}       
+                                        <option v-for="(value, key) in categorys" :value="key">{{key}}</option>   
                                     </select>
                                 </div>
                             
                                 <div class="mb-3">
-                                    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" style="height: 50px;" placeholder="Search Influencer" name="search">
-                                    <button type="submit" class="btn btn-primary" id="search">Search</button>
+                                    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" style="height: 50px;" placeholder="Search Influencer" v-model="find.search">
+                                    <button class="btn btn-primary" id="search" @click="filter" >Search</button>
                                 </div>
                             </form>
                         </div>

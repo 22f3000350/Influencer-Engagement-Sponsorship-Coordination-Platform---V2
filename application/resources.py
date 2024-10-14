@@ -131,9 +131,40 @@ class Campaign_Api(Resource):
     
 
 class Ad_Api(Resource):
-    def get(self):
-        pass
+    @auth_required('token')
+    @roles_required('sponsor')
+    def get(self,sponsor_id):
+        sponsor=Sponsor.query.filter_by(id=sponsor_id).first()
+        ads=[]
+        for camp in sponsor.campaigns:
+            ads+=Ad.query.filter_by(camp_name=camp.name).all()
 
+        influencers=Influencer.query.all()
+
+        data = []
+
+        for ad in ads:
+            a = {}
+            a['id']=ad.id
+            a['camp_name']=ad.camp_name
+            a['requirements']=ad.requirements
+            a['payment_amount']=ad.payment_amount
+            a['negotiate_amount']=ad.negotiate_amount
+            a['status']=ad.status
+            a['flag']=ad.flag
+            a['influencer_id']=ad.influencer_id
+
+            for influencer in influencers:
+                if influencer.id == ad.influencer_id:
+                    a['name']=influencer.name
+
+            data.append(a)
+
+        return data,200
+
+
+    @auth_required('token')
+    @roles_required('sponsor')
     def post(self,sponsor_id,type,influencer_id):
         if influencer_id>0:
             if type=="private":
@@ -156,9 +187,58 @@ class Ad_Api(Resource):
             db.session.commit()
             return {"message":"ok"}
 
+class Sponsor_Filter(Resource):
+    @auth_required('token')
+    @roles_required('sponsor')
+    def get(self):
+        influencers=Influencer.query.all()
+        categorys={}
+        for influencer in influencers:
+            categorys[influencer.category]=categorys.get(influencer.category,0)+1
+        
+        return categorys,200
+    
+    @auth_required('token')
+    @roles_required('sponsor')
+    def post(self):
+        category=request.json["category"]
+        search=request.json["search"]
+
+        influencers = Influencer.query.all()
+
+        if category!="all" and len(search)==0:
+            influencers=Influencer.query.filter_by(category=category).all() 
+        if len(search)>0 and category!="all":
+            influencers=[]
+            influencers1=Influencer.query.filter_by(category=category).all()
+            influencers2=Influencer.query.filter(Influencer.name.like('%{search}%'.format(search=search))).all()
+            for i in influencers2:
+                for j in influencers1:
+                    if i==j:
+                        influencers.append(j)
+                        
+        if len(search)>0 and category=="all":
+            influencers=Influencer.query.filter(Influencer.name.like('%{search}%'.format(search=search))).all()
+
+        data = []
+        for influencer in influencers:
+            i={}
+            i['id']=influencer.id
+            i['name']=influencer.name
+            i['category']=influencer.category
+            i['niche']=influencer.niche
+            i['platform']=influencer.platform
+            i['followers']=influencer.followers
+            i['flag']=influencer.flag
+            data.append(i)
+
+        return data,200
+
+        
 
 
 api.add_resource(Campaign_Api,'/campaign/<int:sponsor_id>','/campaign/<int:sponsor_id>/<int:campaign_id>')
 api.add_resource(Influencer_Info,'/info/influencer')
 api.add_resource(Campaign_Info,'/info/campaign/<int:sponsor_id>')
 api.add_resource(Ad_Api,'/ad/<int:sponsor_id>/<type>/<int:influencer_id>')
+api.add_resource(Sponsor_Filter,'/sponsor_filter')
