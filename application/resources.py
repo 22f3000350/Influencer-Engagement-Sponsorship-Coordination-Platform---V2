@@ -187,6 +187,33 @@ class Ad_Api(Resource):
             db.session.commit()
             return {"message":"ok"}
 
+    @auth_required('token')
+    @roles_required('sponsor')
+    def put(self,sponsor_id,ad_id):
+        payment_amount=request.json["payment_amount"]
+        requirements=request.json["requirements"]
+        ad=Ad.query.filter_by(id=ad_id).first()
+        if len(payment_amount)>0:
+            ad.payment_amount=payment_amount
+        if len(requirements)>0:
+            ad.requirements=requirements
+
+        db.session.commit()
+
+        return {"message":"ok"},200
+
+    @auth_required('token')
+    @roles_required('sponsor')
+    def delete(self,sponsor_id,ad_id):
+        requests=Request.query.filter_by(ad_id=ad_id).all()
+        for request in requests:
+            db.session.delete(request)
+        ad=Ad.query.filter_by(id=ad_id).first()
+        db.session.delete(ad)
+        db.session.commit()
+        return {"message":"ok"},200
+
+
 class Sponsor_Filter(Resource):
     @auth_required('token')
     @roles_required('sponsor')
@@ -240,5 +267,5 @@ class Sponsor_Filter(Resource):
 api.add_resource(Campaign_Api,'/campaign/<int:sponsor_id>','/campaign/<int:sponsor_id>/<int:campaign_id>')
 api.add_resource(Influencer_Info,'/info/influencer')
 api.add_resource(Campaign_Info,'/info/campaign/<int:sponsor_id>')
-api.add_resource(Ad_Api,'/ad/<int:sponsor_id>/<type>/<int:influencer_id>')
+api.add_resource(Ad_Api,'/ad/<int:sponsor_id>/<type>/<int:influencer_id>','/ad/<int:sponsor_id>','/ad/<int:sponsor_id>/<int:ad_id>')
 api.add_resource(Sponsor_Filter,'/sponsor_filter')
