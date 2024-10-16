@@ -260,6 +260,12 @@ class Sponsor_Filter(Resource):
             data.append(i)
 
         return data,200
+    
+class Sponsor_Home(Resource):
+    @auth_required('token')
+    @roles_required('sponsor')
+    def get(self,sponsor_id):
+        pass
 
         
 
