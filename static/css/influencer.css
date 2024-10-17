@@ -1,0 +1,238 @@
+#title{
+    color: white;
+    font-size: 28px;
+    position: relative;
+    width: 100px;
+    top: 50px;
+    left: 10px;
+    margin: 0px;
+}
+
+#heading{
+    color: white;
+    font-size: 45px;
+    width: 850px;
+    position: relative;
+    bottom: 350px;
+    left: 30px;
+}
+
+#desc{
+    color: white;
+    position: relative;
+    bottom: 340px;
+    width: 740px;
+    left: 30px;
+}
+#logout_btn{
+    background-color: white;
+    border: none;
+    border-radius: 23px;
+    width: 135px;
+    height: 47px;
+    margin-right: 20px;
+    position: relative;
+    bottom: 638px;
+    left: 1500px;
+}
+
+#header{
+    width: 1710px;
+    height: 160px;
+    position: relative;
+    bottom: 46px;
+}
+
+#img_header{
+    width: 1710px;
+    height: 460px;
+}
+
+#influencer_main{
+    
+    width: 1350px;
+    height: 700px;
+    margin-top: 310px;
+    margin-left: 10px;
+    overflow-y:auto;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.sample{
+    background-color: white;
+    border: 1px solid black;
+    width: 300px;
+    height: 500px;
+    margin: 60px;
+}
+
+#influencer_main::-webkit-scrollbar{
+    display: none;
+}
+
+#sidebar{
+    background-color: white;
+    border: 1px solid rgba(223, 230, 239);
+    position: relative;
+    left: 1390px;
+    bottom: 700px;
+    width: 260px;
+    height: 540px;
+}
+
+#profile{
+    width: 260px;
+    height: 200px;
+}
+
+#img_profile{
+    width: 200px;
+    height: 200px;
+    margin-left: 30px;
+    margin-top: 20px;
+}
+
+#buttons{
+    width: 260px;
+    height: 260px;
+    position: absolute;
+    margin-top: 60px;
+
+}
+
+.button{
+    background-color: white;
+    color: #6E7891;
+    font-size: 17px;
+    margin-left: 30px;
+    margin-top: 30px;
+    border: none;
+    border-radius: 8px;
+    width: 200px;
+    height: 43px;
+}
+
+#campaign_content{
+    position: relative;
+    bottom: 60px;
+    width: 1340px;
+    height: 500px;
+    margin-left: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+
+.campaign_card{
+    background-color: rgba(135, 42, 223, 0.823);
+    border: 1px solid rgb(207, 221, 239);
+    border-radius: 8px;
+    width: 420px;
+    height: 250px;
+    color: white;
+}
+
+#influencer_request_button{
+    border: 1px solid black;
+    background-color: white;
+    border-radius: 5px;
+    height: 45px;
+    width: 180px;
+    margin-top: 30px;
+    margin-left: 170px;
+    color: black;
+}
+
+#influencer_request_button:hover{
+    border: 1px solid black;
+    background-color: rgba(174, 106, 242, 0.864);
+    color: white;
+    border-radius: 5px;
+    height: 45px;
+    width: 180px;
+    margin-top: 30px;
+    margin-left: 170px;
+}
+
+.requests_card{
+    background-color: white;
+    border: 1px solid  rgb(211, 224, 240) ;
+    border-radius: 5px;
+    width: 350px;
+    height: 480px;
+    margin-left: 20px;
+}
+
+#main_content{
+    background-color: white;
+    width: 1300px;
+    height: 650px;
+    margin-left: 30px;
+    margin-top: 10px;
+    border-radius: 5px;
+    
+}
+
+#table_content{
+    background-color: white;
+    width: 1250px;
+    height: 550px;
+    margin-left: 20px;
+    margin-top: 30px;
+    overflow-y: auto;
+    
+}
+
+#table_content::-webkit-scrollbar{
+    display: none;
+}
+
+
+
+th{
+    width: 30px;
+    height: 20px;
+    
+}
+
+td{
+    width: 30px;
+    height: 70px;
+    vertical-align: middle;
+}
+
+
+#filter{
+    width: 150px;
+    height: 50px;
+    position: relative;
+    right: 170px;
+    top: 50px;
+}
+
+#search_bar{
+    width: 300px;
+    height: 80px;
+    position: relative;
+    left: 860px;
+    bottom: 100px;
+
+}
+
+#search{
+    background-color: #7F27FF;
+    border:#7F27FF;
+    width: 150px;
+    height: 45px;
+    position: relative;
+    left: 310px;
+    bottom: 48px;
+}
+
+#edit_box{
+    width: 500px;
+    height: 600px;
+    margin-left: 500px;
+    margin-top: 50px;
+}

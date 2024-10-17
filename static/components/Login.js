@@ -33,6 +33,10 @@ export default {
                         if(data.role=="sponsor"){
                             this.$router.push({name:'Sponsor_Home',params:{'sponsor_id':data.id}})
                         }
+
+                        if(data.role=="influencer"){
+                            this.$router.push({name:'Influencer_Campaigns',params:{'influencer_id':data.id,'influencer_name':data.name}})
+                        }
                     }
                     else{
                         this.message=data.message

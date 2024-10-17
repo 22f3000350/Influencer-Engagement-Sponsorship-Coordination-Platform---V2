@@ -10,6 +10,10 @@ import Sponsor_Delete_Ad from './components/Sponsor_Delete_Ad.js'
 import Sponsor_New_Campaign from './components/Sponsor_New_Campaign.js'
 import Sponsor_Update_Campaign from './components/Sponsor_Update_Campaign.js'
 import Sponsor_Delete_Campaign from './components/Sponsor_Delete_Campaign.js'
+import Influencer_Campaigns from './components/Influencer_Campaigns.js'
+import Influencer_Requests from './components/Influencer_Requests.js'
+import Influencer_Status from './components/Influencer_Status.js'
+import Influencer_Edit from './components/Influencer_Edit.js'
 
 const routes = [
     {path:'/', component: Home, name: 'Home'},
@@ -23,7 +27,11 @@ const routes = [
     {path:'/sponsor/delete_ad/:sponsor_id', component: Sponsor_Delete_Ad, name: 'Sponsor_Delete_Ad'},
     {path:'/sponsor/new_campaign/:sponsor_id', component: Sponsor_New_Campaign, name: 'Sponsor_New_Campaign'},
     {path:'/sponsor/update_campaign/:sponsor_id', component: Sponsor_Update_Campaign, name: 'Sponsor_Update_Campaign'},
-    {path:'/sponsor/delete_campaign/:sponsor_id', component: Sponsor_Delete_Campaign, name: 'Sponsor_Delete_Campaign'}
+    {path:'/sponsor/delete_campaign/:sponsor_id', component: Sponsor_Delete_Campaign, name: 'Sponsor_Delete_Campaign'},
+    {path:'/influencer/campaigns/:influencer_id/:influencer_name', component: Influencer_Campaigns, name: 'Influencer_Campaigns'},
+    {path:'/influencer/requests/:influencer_id/:influencer_name', component: Influencer_Requests, name: 'Influencer_Requests'},
+    {path:'/influencer/status/:influencer_id/:influencer_name', component: Influencer_Status, name: 'Influencer_Status'},
+    {path:'/influencer/edit/:influencer_id/:influencer_name', component: Influencer_Edit, name: 'Influencer_Edit'},
     
 ]
 

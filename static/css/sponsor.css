@@ -15,7 +15,7 @@
     right: 7px;
 }
 
-#main{
+#sponsor_main{
     background-color: #ebf0f8;
     width: 1383px;
     height: 719px;
@@ -25,7 +25,7 @@
     overflow-y: auto;
 }
 
-#main::-webkit-scrollbar{
+#sponsor_main::-webkit-scrollbar{
     display: none;
 }
 

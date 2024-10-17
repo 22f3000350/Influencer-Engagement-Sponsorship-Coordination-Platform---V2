@@ -31,7 +31,7 @@ export default {
                 
             </div>
             
-            <div id="main">
+            <div id="sponsor_main">
                 <slot></slot>
             </div>
 
