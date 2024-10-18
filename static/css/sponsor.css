@@ -1,4 +1,4 @@
-#header{
+#sponsor_header{
     border: 1px solid rgba(211, 219, 227, 0.882) ;
     width: 1700px ;
     height: 70px;
@@ -7,7 +7,7 @@
     bottom: 7px;
 }
 
-#sidebar{
+#sponsor_sidebar{
     width: 280px;
     height: 721px;
     position: relative;
@@ -273,7 +273,7 @@ td{
     left: 15px;
 }
 
-#filter{
+#sponsor_filter{
     width: 150px;
     height: 50px;
     position: relative;
@@ -281,7 +281,7 @@ td{
     top: 50px;
 }
 
-#search_bar{
+#sponsor_search_bar{
     width: 300px;
     height: 80px;
     position: relative;
@@ -290,7 +290,7 @@ td{
 
 }
 
-#search{
+#sponsor_search{
     background-color: #7F27FF;
     border:#7F27FF;
     width: 150px;

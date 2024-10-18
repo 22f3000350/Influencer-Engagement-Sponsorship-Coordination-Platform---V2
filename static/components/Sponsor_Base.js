@@ -2,13 +2,13 @@ export default {
     props:['sponsor_id','home','requests','new_ad','update_ad','delete_ad','new_campaign','update_campaign','delete_campaign'],
     template:`
         <div>
-             <div id="header">
+             <div id="sponsor_header">
                 <div id="icon">
                     <h1 id="icon_text">Sponsor</h1>
                 </div>
                 <router-link to="/"><button id="logout">Log Out</button></router-link>
             </div>
-            <div id="sidebar">
+            <div id="sponsor_sidebar">
                 <router-link :to="'/sponsor/home/'+sponsor_id"><button class="button" :style="home" >Home</button></router-link>
 
                 <p class="side_heading">Manage Ads</p>

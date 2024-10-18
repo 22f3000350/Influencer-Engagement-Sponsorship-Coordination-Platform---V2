@@ -2,7 +2,7 @@ export default {
     props:['influencer_id','name','campaigns','requests','status','edit'],
     template:`
         <div style="background-color:#ebf0f8;">
-            <div id="header">
+            <div id="influencer_header">
                 <h2 id="title">Influencer</h2>
                 <img src="./static/images/influencer_header.jpg" id="img_header" >
                 <h2 id="heading">Influencers Driving Trends and Shaping Consumer Choices</h2>

@@ -34,7 +34,7 @@ export default {
             return res.json()
         })
         .then((data) => {
-            this.ads = data
+            this.ads = data;
         })
     },
     methods:{

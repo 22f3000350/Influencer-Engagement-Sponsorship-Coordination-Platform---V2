@@ -261,13 +261,67 @@ class Sponsor_Filter(Resource):
 
         return data,200
     
-class Sponsor_Home(Resource):
+class Influencer_Edit(Resource):
     @auth_required('token')
-    @roles_required('sponsor')
-    def get(self,sponsor_id):
-        pass
-
+    @roles_required('influencer')
+    def post(self,influencer_id):
+        data = request.get_json()
+        category=data.get("category")
+        niche=data.get("niche")
+        platform=data.get("platform")
+        followers=data.get("followers")
         
+        influencer=Influencer.query.filter_by(id=influencer_id).first()
+
+        if len(category)>0:
+            influencer.category=category
+        if len(niche)>0:
+            influencer.niche=niche
+        if len(platform)>0:
+            influencer.platform=platform
+        if len(followers)>0:
+            influencer.followers=followers
+        
+        db.session.commit()
+
+        return {"message":"ok"},200
+    
+class Influencer_Requests(Resource):
+    @auth_required('token')
+    @roles_required('influencer')
+    def get(self,influencer_id):
+        ads=Ad.query.filter_by(influencer_id=influencer_id,status="Pending",negotiate_amount=0).all()
+        data = []
+        for ad in ads:
+            a = {}
+            a['id']=ad.id
+            a['camp_name']=ad.camp_name
+            a['requirements']=ad.requirements
+            a['payment_amount']=ad.payment_amount
+            a['negotiate_amount']=ad.negotiate_amount
+            a['status']=ad.status
+            a['flag']=ad.flag
+            a['influencer_id']=ad.influencer_id
+
+            data.append(a)
+
+        return data,200
+    
+    @auth_required('token')
+    @roles_required('influencer')
+    def put(self,ad_id,type):
+        if ad_id>0 and type=='accepted':
+            ad=Ad.query.filter_by(id=ad_id).first()
+            ad.status="Accepted"
+            db.session.commit()
+            return {"message":"ok"},200
+    
+        if ad_id>0 and type=='rejected':
+            ad=Ad.query.filter_by(id=ad_id).first()
+            ad.status="Rejected"
+            db.session.commit()
+            return {"message":"ok"},200
+
 
 
 api.add_resource(Campaign_Api,'/campaign/<int:sponsor_id>','/campaign/<int:sponsor_id>/<int:campaign_id>')
@@ -275,3 +329,5 @@ api.add_resource(Influencer_Info,'/info/influencer')
 api.add_resource(Campaign_Info,'/info/campaign/<int:sponsor_id>')
 api.add_resource(Ad_Api,'/ad/<int:sponsor_id>/<type>/<int:influencer_id>','/ad/<int:sponsor_id>','/ad/<int:sponsor_id>/<int:ad_id>')
 api.add_resource(Sponsor_Filter,'/sponsor_filter')
+api.add_resource(Influencer_Edit,'/influencer/edit/<int:influencer_id>')
+api.add_resource(Influencer_Requests,'/influencer/requests/<int:influencer_id>','/influencer/requests/<int:ad_id>/<type>')

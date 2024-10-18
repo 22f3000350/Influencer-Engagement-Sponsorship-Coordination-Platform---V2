@@ -143,10 +143,10 @@ export default {
                     <button class="new_ad_button" style="background-color:blueviolet;color: white;">Private</button>
                     <button class="new_ad_button" style="position: relative;right: 5px;" @click="change">Public</button>
                     
-                        <div id="search_bar" v-if="!form">
+                        <div id="sponsor_search_bar" v-if="!form">
                             <form>
                                 <div>
-                                    <select class="form-select" aria-label="Default select example" id="filter" v-model="find.category">
+                                    <select class="form-select" aria-label="Default select example" id="sponsor_filter" v-model="find.category">
                                     <option selected value="all">All</option>
                                         <option v-for="(value, key) in categorys" :value="key">{{key}}</option>   
                                     </select>
@@ -154,7 +154,7 @@ export default {
                             
                                 <div class="mb-3">
                                     <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" style="height: 50px;" placeholder="Search Influencer" v-model="find.search">
-                                    <button class="btn btn-primary" id="search" @click="filter" >Search</button>
+                                    <button class="btn btn-primary" id="sponsor_search" @click="filter" >Search</button>
                                 </div>
                             </form>
                         </div>
