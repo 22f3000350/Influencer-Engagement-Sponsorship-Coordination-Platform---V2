@@ -286,6 +286,29 @@ class Influencer_Edit(Resource):
 
         return {"message":"ok"},200
     
+
+class Influencer_Campaigns(Resource):
+    @auth_required('token')
+    @roles_required('influencer')
+    def get(self):
+        ads=Ad.query.filter_by(influencer_id=0).all()
+        data = []
+        for ad in ads:
+            a = {}
+            a['id']=ad.id
+            a['camp_name']=ad.camp_name
+            a['requirements']=ad.requirements
+            a['payment_amount']=ad.payment_amount
+            a['negotiate_amount']=ad.negotiate_amount
+            a['status']=ad.status
+            a['flag']=ad.flag
+            a['influencer_id']=ad.influencer_id
+
+            data.append(a)
+
+        return data,200
+
+    
 class Influencer_Requests(Resource):
     @auth_required('token')
     @roles_required('influencer')
@@ -321,7 +344,35 @@ class Influencer_Requests(Resource):
             ad.status="Rejected"
             db.session.commit()
             return {"message":"ok"},200
+        
+    @auth_required('token')
+    @roles_required('influencer')
+    def post(self,ad_id):
+        negotiate_amount=request.json["negotiate_amount"]
+        ad=Ad.query.filter_by(id=ad_id).first()
+        ad.negotiate_amount=negotiate_amount  
+        db.session.commit()
 
+class Influencer_Status(Resource):
+    @auth_required('token')
+    @roles_required('influencer')
+    def get(self,influencer_id):
+        ads=Ad.query.filter_by(influencer_id=influencer_id).all()
+        data = []
+        for ad in ads:
+            a = {}
+            a['id']=ad.id
+            a['camp_name']=ad.camp_name
+            a['requirements']=ad.requirements
+            a['payment_amount']=ad.payment_amount
+            a['negotiate_amount']=ad.negotiate_amount
+            a['status']=ad.status
+            a['flag']=ad.flag
+            a['influencer_id']=ad.influencer_id
+
+            data.append(a)
+
+        return data,200
 
 
 api.add_resource(Campaign_Api,'/campaign/<int:sponsor_id>','/campaign/<int:sponsor_id>/<int:campaign_id>')
@@ -330,4 +381,6 @@ api.add_resource(Campaign_Info,'/info/campaign/<int:sponsor_id>')
 api.add_resource(Ad_Api,'/ad/<int:sponsor_id>/<type>/<int:influencer_id>','/ad/<int:sponsor_id>','/ad/<int:sponsor_id>/<int:ad_id>')
 api.add_resource(Sponsor_Filter,'/sponsor_filter')
 api.add_resource(Influencer_Edit,'/influencer/edit/<int:influencer_id>')
-api.add_resource(Influencer_Requests,'/influencer/requests/<int:influencer_id>','/influencer/requests/<int:ad_id>/<type>')
+api.add_resource(Influencer_Campaigns,'/influencer/campaigns')
+api.add_resource(Influencer_Requests,'/influencer/requests/<int:influencer_id>','/influencer/requests/<int:ad_id>/<type>','/influencer/requests/<int:ad_id>')
+api.add_resource(Influencer_Status,'/influencer/status/<int:influencer_id>')

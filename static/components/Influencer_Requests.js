@@ -8,7 +8,8 @@ export default {
         return {
             id:this.$route.params.influencer_id,
             ad_id:0,
-            ads:[]
+            ads:[],
+            negotiate_amount:''
         }
     },
     mounted(){
@@ -64,12 +65,20 @@ export default {
             })
 
             this.ad_id=0;
+        },
+
+        negotiate:function(){
+            console.log(this.negotiate_amount)
+            this.negotiate_amount='0';
         }
     },
     template:`
         <Influencer_Base requests="background-color: blueviolet; color: white;" :influencer_id="$route.params.influencer_id" :name="$route.params.influencer_name">
             <h2 style="margin-left: 20px;">Ad Requests</h2>
-            <div id="campaign_content">
+            
+             <h3 style="margin-top: 100px; margin-left: 300px;color: rgb(50, 47, 47);" v-if="ads.length==0">No ad request available</h3>
+            
+            <div id="campaign_content" v-else>
 
             <div class="requests_card" v-for="ad in ads">
 
@@ -84,9 +93,9 @@ export default {
                     <div style="width: 250px;height: 40px;margin-left: 40px;margin-top: 20px;">
                         <form>
                             <div class="mb-3">
-                                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Amount" name="negotiate_amount">
+                                <input type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Amount" v-model="negotiate_amount">
                             </div>
-                            <button class="btn btn-primary" style="width: 200px;height: 45px;margin-left: 20px;">Negotiate</button>
+                            <button class="btn btn-primary" style="width: 200px;height: 45px;margin-left: 20px;" @click="negotiate" >Negotiate</button>
                         </form>
                     </div>
 
