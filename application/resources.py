@@ -261,6 +261,63 @@ class Sponsor_Filter(Resource):
 
         return data,200
     
+class Influencer_Filter(Resource):
+    @auth_required('token')
+    @roles_required('influencer')
+    def get(self):
+        ads=Ad.query.filter_by(influencer_id=0).all()
+        campaigns={}
+        for ad in ads:
+            campaigns[ad.camp_name]=campaigns.get(ad.camp_name,0)+1
+
+        return campaigns,200
+    
+    @auth_required('token')
+    @roles_required('influencer')
+    def post(self):
+        campaign=request.json["campaign"]
+        search=request.json["search"]
+
+        ads=Ad.query.filter_by(influencer_id=0).all()
+
+        if campaign!="all" and len(search)==0:
+            ads=Ad.query.filter_by(influencer_id=0,camp_name=campaign).all() 
+        if len(search)>0 and campaign!="all":
+            ads=[]
+            ads1=Ad.query.filter_by(influencer_id=0,camp_name=campaign).all()
+            ads2=Ad.query.filter(Ad.camp_name.like('%{search}%'.format(search=search))).all()
+            for i in ads2:
+                for j in ads1:
+                    if i==j:
+                        ads.append(j)
+                        
+        if len(search)>0 and campaign=="all":
+            ads=[]
+            ads1=Ad.query.filter_by(influencer_id=0).all()
+            ads2=Ad.query.filter(Ad.camp_name.like('%{search}%'.format(search=search))).all()
+            for i in ads2:
+                for j in ads1:
+                    if i==j:
+                        ads.append(j)
+
+        data = []
+
+        for ad in ads:
+            a = {}
+            a['id']=ad.id
+            a['camp_name']=ad.camp_name
+            a['requirements']=ad.requirements
+            a['payment_amount']=ad.payment_amount
+            a['negotiate_amount']=ad.negotiate_amount
+            a['status']=ad.status
+            a['flag']=ad.flag
+            a['influencer_id']=ad.influencer_id
+
+            data.append(a)
+
+        return data,200
+      
+    
 class Influencer_Edit(Resource):
     @auth_required('token')
     @roles_required('influencer')
@@ -307,6 +364,24 @@ class Influencer_Campaigns(Resource):
             data.append(a)
 
         return data,200
+    
+    @auth_required('token')
+    @roles_required('influencer')
+    def put(self,influencer_id,ad_id):
+        if ad_id>0:
+            ad=Ad.query.filter_by(id=ad_id).first()
+            #ad.influencer_id=-1
+            request_ad=Request.query.filter_by(ad_id=ad_id,influencer_id=influencer_id).first()
+        if request_ad:
+            return {"message":"ok"},200
+        else:
+            influencer=Influencer.query.filter_by(id=influencer_id).first()
+            campaign=Campaign.query.filter_by(name=ad.camp_name).first()
+            requests=Request(ad_id=ad_id,influencer_id=influencer_id,name=influencer.name,category=influencer.category,niche=influencer.niche,followers=influencer.followers,platform=influencer.platform,sponsor_id=campaign.sponsor_id)
+            db.session.add(requests)
+            db.session.commit()
+            return {"message":"ok"},200
+    
 
     
 class Influencer_Requests(Resource):
@@ -381,6 +456,7 @@ api.add_resource(Campaign_Info,'/info/campaign/<int:sponsor_id>')
 api.add_resource(Ad_Api,'/ad/<int:sponsor_id>/<type>/<int:influencer_id>','/ad/<int:sponsor_id>','/ad/<int:sponsor_id>/<int:ad_id>')
 api.add_resource(Sponsor_Filter,'/sponsor_filter')
 api.add_resource(Influencer_Edit,'/influencer/edit/<int:influencer_id>')
-api.add_resource(Influencer_Campaigns,'/influencer/campaigns')
+api.add_resource(Influencer_Campaigns,'/influencer/campaigns','/influencer/campaigns/<int:influencer_id>/<int:ad_id>')
 api.add_resource(Influencer_Requests,'/influencer/requests/<int:influencer_id>','/influencer/requests/<int:ad_id>/<type>','/influencer/requests/<int:ad_id>')
 api.add_resource(Influencer_Status,'/influencer/status/<int:influencer_id>')
+api.add_resource(Influencer_Filter,'/influencer/filter')
