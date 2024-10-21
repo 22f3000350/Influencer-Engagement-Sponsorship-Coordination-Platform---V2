@@ -1,0 +1,139 @@
+#admin_header{
+    border: 1px solid rgba(211, 219, 227, 0.882) ;
+    width: 1708px ;
+    height: 70px;
+    position: relative;
+    right: 1px;
+    bottom: 1px;
+    background-color: rgb(255, 255, 255);
+}
+
+#logout{
+    background-color: white;
+    color: #7F27FF;
+    font-size: 17px;
+    width: 120px;
+    height: 40px;
+    border: 1px solid #7F27FF;
+    border-radius: 6px;
+    position: relative;
+    left: 1400px;
+    bottom: 40px;
+}
+
+#flags{
+    background-color: #7F27FF;
+    color: white;
+    font-size: 17px;
+    width: 120px;
+    height: 40px;
+    border: none;
+    border-radius: 2px;
+    position: relative;
+    left: 1360px;
+    bottom: 40px;
+
+}
+
+#logout:hover{
+    background-color: #7F27FF;
+    color: white;
+}
+
+#icon_text{
+    margin-left: 10px;
+    margin-top: 10px;
+}
+
+#num_stat{
+    width: 920px;
+    height: 200px;
+    margin-left: 30px;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+}
+
+#sponsor_table{
+    background-color: white;
+    border-radius: 10px;
+    position: relative;
+    bottom: 250px;
+    left: 980px;
+    width: 700px;
+    height: 450px;
+    padding: 0px;
+    overflow-y: auto;
+}
+
+#influencer_table{
+    background-color: white;
+    border-radius: 10px;
+    position: relative;
+    bottom: 200px;
+    left: 980px;
+    width: 700px;
+    height: 450px;
+    padding: 0px;
+    overflow-y: auto;
+}
+
+#campaign_table{
+    background-color: white;
+    border-radius: 10px;
+    position: relative;
+    bottom: 150px;
+    left: 980px;
+    width: 700px;
+    height: 450px;
+    padding: 0px;
+    overflow-y: auto;
+}
+
+#ad_table{
+    background-color: white;
+    border-radius: 10px;
+    position: relative;
+    bottom: 600px;
+    left: 30px;
+    width: 920px;
+    height: 450px;
+    padding: 0px;
+    overflow-y: auto;
+}
+
+#graph{
+    
+    border-radius: 10px;
+    position: relative;
+    bottom: 1760px;
+    left: 30px;
+    width: 920px;
+    height: 700px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+
+.graph{
+    background-color: white;
+    border-radius: 10px;
+    width: 440px;
+    height: 300px;
+}
+
+.box{
+    background-color: white;
+    border-radius: 5px;
+    width: 250px;
+    height: 200px;
+}
+
+
+jddjd{
+    background-color: rgb(55, 216, 55);
+}
+
+
+

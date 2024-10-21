@@ -5,6 +5,23 @@ from flask_security import auth_required,roles_required
 
 api = Api()
 
+class Sponsor_Info(Resource):
+    @auth_required('token')
+    @roles_required('admin')
+    def get(self):
+        sponsors = Sponsor.query.all()
+        data = []
+        for sponsor in sponsors:
+            s={}
+            s['id']=sponsor.id
+            s['name']=sponsor.name
+            s['company']=sponsor.company
+            s['budget']=sponsor.budget
+            s['flag']=sponsor.flag
+            data.append(s)
+
+        return data,200
+
 class Campaign_Info(Resource):
     @auth_required('token')
     @roles_required('sponsor')
@@ -460,3 +477,4 @@ api.add_resource(Influencer_Campaigns,'/influencer/campaigns','/influencer/campa
 api.add_resource(Influencer_Requests,'/influencer/requests/<int:influencer_id>','/influencer/requests/<int:ad_id>/<type>','/influencer/requests/<int:ad_id>')
 api.add_resource(Influencer_Status,'/influencer/status/<int:influencer_id>')
 api.add_resource(Influencer_Filter,'/influencer/filter')
+api.add_resource(Sponsor_Info,'/sponsor_info')

@@ -25,7 +25,7 @@ def login():
                 elif role=="influencer":
                     influencer = Influencer.query.filter_by(name=user.username).first()
                     return {"message":"ok","token":user.get_auth_token(),"role":role,"id":influencer.id,"name":influencer.name},201
-                elif role=="Admin":
+                elif role=="admin":
                     return {"message":"ok","token":user.get_auth_token(),"role":role},201
 
             else:

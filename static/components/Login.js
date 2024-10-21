@@ -37,6 +37,10 @@ export default {
                         if(data.role=="influencer"){
                             this.$router.push({name:'Influencer_Campaigns',params:{'influencer_id':data.id,'influencer_name':data.name}})
                         }
+
+                        if(data.role=="admin"){
+                            this.$router.push({name:'Admin_Dash'})
+                        }
                     }
                     else{
                         this.message=data.message

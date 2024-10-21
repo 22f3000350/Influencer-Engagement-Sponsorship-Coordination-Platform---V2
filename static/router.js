@@ -14,6 +14,7 @@ import Influencer_Campaigns from './components/Influencer_Campaigns.js'
 import Influencer_Requests from './components/Influencer_Requests.js'
 import Influencer_Status from './components/Influencer_Status.js'
 import Influencer_Edit from './components/Influencer_Edit.js'
+import Admin_Dash from './components/Admin_Dash.js'
 
 const routes = [
     {path:'/', component: Home, name: 'Home'},
@@ -32,6 +33,7 @@ const routes = [
     {path:'/influencer/requests/:influencer_id/:influencer_name', component: Influencer_Requests, name: 'Influencer_Requests'},
     {path:'/influencer/status/:influencer_id/:influencer_name', component: Influencer_Status, name: 'Influencer_Status'},
     {path:'/influencer/edit/:influencer_id/:influencer_name', component: Influencer_Edit, name: 'Influencer_Edit'},
+    {path:'/admin/dash', component: Admin_Dash, name: 'Admin_Dash'}
     
 ]
 
