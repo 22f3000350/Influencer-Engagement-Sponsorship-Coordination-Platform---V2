@@ -1,7 +1,7 @@
 from flask_restful import Api,Resource
 from .database import *
 from flask import request, jsonify
-from flask_security import auth_required,roles_required
+from flask_security import auth_required,roles_required,roles_accepted
 
 api = Api()
 
@@ -24,10 +24,16 @@ class Sponsor_Info(Resource):
 
 class Campaign_Info(Resource):
     @auth_required('token')
-    @roles_required('sponsor')
+    @roles_accepted('sponsor','admin')
     def get(self,sponsor_id):
-        campaigns = Campaign.query.filter_by(sponsor_id=sponsor_id).all()
+
+        if sponsor_id==20000:
+            campaigns = Campaign.query.all()
+        else:
+            campaigns = Campaign.query.filter_by(sponsor_id=sponsor_id).all()
+
         data=[]
+
         for campaign in campaigns:
             c={}
             c['id']=campaign.id
@@ -47,7 +53,7 @@ class Campaign_Info(Resource):
 
 class Influencer_Info(Resource):
     @auth_required('token')
-    @roles_required('sponsor')
+    @roles_accepted('sponsor','admin')
     def get(self):
         influencers = Influencer.query.all()
         data = []
@@ -149,12 +155,16 @@ class Campaign_Api(Resource):
 
 class Ad_Api(Resource):
     @auth_required('token')
-    @roles_required('sponsor')
+    @roles_accepted('sponsor','admin')
     def get(self,sponsor_id):
-        sponsor=Sponsor.query.filter_by(id=sponsor_id).first()
-        ads=[]
-        for camp in sponsor.campaigns:
-            ads+=Ad.query.filter_by(camp_name=camp.name).all()
+
+        if sponsor_id==20000:            
+            ads=Ad.query.all()
+        else:
+            sponsor=Sponsor.query.filter_by(id=sponsor_id).first()
+            ads=[]
+            for camp in sponsor.campaigns:
+                ads+=Ad.query.filter_by(camp_name=camp.name).all()
 
         influencers=Influencer.query.all()
 
