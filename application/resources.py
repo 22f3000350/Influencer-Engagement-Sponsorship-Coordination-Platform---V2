@@ -5,6 +5,43 @@ from flask_security import auth_required,roles_required,roles_accepted
 
 api = Api()
 
+class Admin_Flag(Resource):
+    @auth_required('token')
+    @roles_required('admin')
+    def get(self,type,id):
+        if type=="sponsor":
+            sponsor=Sponsor.query.filter_by(id=id).first()
+            if sponsor.flag=="False":
+                sponsor.flag="True"
+            elif sponsor.flag=="True":
+                sponsor.flag="False"
+
+        elif type=="influencer":
+            influencer=Influencer.query.filter_by(id=id).first()
+            if influencer.flag=="False":
+                influencer.flag="True"
+            elif influencer.flag=="True":
+                influencer.flag="False"
+
+        elif type=="campaign":
+            campaign=Campaign.query.filter_by(id=id).first()
+            if campaign.flag=="False":
+                campaign.flag="True"
+            elif campaign.flag=="True":
+                campaign.flag="False"
+
+        elif type=="ad":
+            ad=Ad.query.filter_by(id=id).first()
+            if ad.flag=="False":
+                ad.flag="True"
+            elif ad.flag=="True":
+                ad.flag="False"
+
+        db.session.commit()
+
+        return {"message":"ok"},200
+
+
 class Sponsor_Info(Resource):
     @auth_required('token')
     @roles_required('admin')
@@ -488,3 +525,4 @@ api.add_resource(Influencer_Requests,'/influencer/requests/<int:influencer_id>',
 api.add_resource(Influencer_Status,'/influencer/status/<int:influencer_id>')
 api.add_resource(Influencer_Filter,'/influencer/filter')
 api.add_resource(Sponsor_Info,'/sponsor_info')
+api.add_resource(Admin_Flag,'/admin_flag/<type>/<int:id>')

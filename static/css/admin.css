@@ -55,7 +55,7 @@
     gap: 30px;
 }
 
-#sponsor_table{
+#admin_sponsor_table{
     background-color: white;
     border-radius: 10px;
     position: relative;
@@ -67,7 +67,7 @@
     overflow-y: auto;
 }
 
-#influencer_table{
+#admin_influencer_table{
     background-color: white;
     border-radius: 10px;
     position: relative;
@@ -79,7 +79,7 @@
     overflow-y: auto;
 }
 
-#campaign_table{
+#admin_campaign_table{
     background-color: white;
     border-radius: 10px;
     position: relative;
@@ -91,7 +91,7 @@
     overflow-y: auto;
 }
 
-#ad_table{
+#admin_ad_table{
     background-color: white;
     border-radius: 10px;
     position: relative;
@@ -131,9 +131,6 @@
 }
 
 
-jddjd{
-    background-color: rgb(55, 216, 55);
-}
 
 
 
