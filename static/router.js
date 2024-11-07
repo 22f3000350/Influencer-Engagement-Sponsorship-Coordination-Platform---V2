@@ -16,6 +16,7 @@ import Influencer_Status from './components/Influencer_Status.js'
 import Influencer_Edit from './components/Influencer_Edit.js'
 import Admin_Dash from './components/Admin_Dash.js'
 import Admin_Flag from './components/Admin_Flag.js'
+import Admin_Approval from './components/Admin_Approval.js'
 
 const routes = [
     {path:'/', component: Home, name: 'Home'},
@@ -35,7 +36,8 @@ const routes = [
     {path:'/influencer/status/:influencer_id/:influencer_name', component: Influencer_Status, name: 'Influencer_Status'},
     {path:'/influencer/edit/:influencer_id/:influencer_name', component: Influencer_Edit, name: 'Influencer_Edit'},
     {path:'/admin/dash', component: Admin_Dash, name: 'Admin_Dash'},
-    {path:'/admin/flag', component: Admin_Flag, name: 'Admin_Flag'}
+    {path:'/admin/flag', component: Admin_Flag, name: 'Admin_Flag'},
+    {path:'/admin/approval', component: Admin_Approval, name: 'Admin_Approval'}
     
 ]
 

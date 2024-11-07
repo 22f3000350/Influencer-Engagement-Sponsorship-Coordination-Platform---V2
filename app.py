@@ -4,6 +4,7 @@ from config import LocalDevelopmentConfig
 from application.database import *
 from application.resources import *
 from flask_security import Security,SQLAlchemyUserDatastore,hash_password
+from application.worker import celery_init_app
 
 app = Flask(__name__)
 cors = CORS(app)
@@ -12,6 +13,7 @@ db.init_app(app)
 api.init_app(app)
 datastore=SQLAlchemyUserDatastore(db,User,Role)
 app.security=Security(app,datastore)
+celery_app = celery_init_app(app)
 app.app_context().push()
 
 with app.app_context():

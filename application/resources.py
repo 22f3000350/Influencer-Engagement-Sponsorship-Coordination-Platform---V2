@@ -5,6 +5,19 @@ from flask_security import auth_required,roles_required,roles_accepted
 
 api = Api()
 
+class Admin_Approval(Resource):
+    @auth_required('token')
+    @roles_required('admin')
+    def get(self,id):
+
+        sponsor=Sponsor.query.filter_by(id=id).first()
+
+        sponsor.approval = "True"
+
+        db.session.commit()
+
+        return {"message":"ok"},200
+
 class Admin_Flag(Resource):
     @auth_required('token')
     @roles_required('admin')
@@ -55,6 +68,7 @@ class Sponsor_Info(Resource):
             s['company']=sponsor.company
             s['budget']=sponsor.budget
             s['flag']=sponsor.flag
+            s['approval']=sponsor.approval
             data.append(s)
 
         return data,200
@@ -526,3 +540,4 @@ api.add_resource(Influencer_Status,'/influencer/status/<int:influencer_id>')
 api.add_resource(Influencer_Filter,'/influencer/filter')
 api.add_resource(Sponsor_Info,'/sponsor_info')
 api.add_resource(Admin_Flag,'/admin_flag/<type>/<int:id>')
+api.add_resource(Admin_Approval,'/admin_approval/<int:id>')

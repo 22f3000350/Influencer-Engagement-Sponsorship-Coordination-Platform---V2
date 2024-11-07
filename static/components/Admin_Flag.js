@@ -61,7 +61,7 @@ export default {
 
     },
     template:`
-        <div style="background-color: #ebf0f8;">
+        <div>
 
             <div id="header">
                 <div id="icon">
@@ -73,38 +73,42 @@ export default {
                 </div>
             </div>
 
-            <h1 style="margin-top: 50px;text-align: center;font-family:'Courier New', Courier, monospace;">Flagged</h1>
-            <br>
+            <div style="background-color: #ebf0f8;">
 
-            <div id="flag_content" style="width: 1000px;margin-left: 350px;">
-
-                <div class="card" v-for="sponsor in sponsors" v-if="sponsor.flag == 'True' ">
-                    <div class="card-body">
-                    <h2 style="margin-left: 30px;">{{sponsor.name}}  |  Sponsor</h2>
-                    </div>
-                </div>
+                <h1 style="margin-top: 50px;text-align: center;font-family:'Courier New', Courier, monospace;">Flagged</h1>
                 <br>
 
-                <div class="card" v-for="influencer in influencers" v-if="influencer.flag == 'True' ">
-                    <div class="card-body">
-                    <h2 style="margin-left: 30px;">{{influencer.name}}  |  Influencer</h2>
-                    </div>
-                </div>
-                <br>
+                <div id="flag_content" style="width: 1000px;margin-left: 350px;">
 
-                <div class="card" v-for="campaign in campaigns" v-if="campaign.flag == 'True' ">
-                    <div class="card-body">
-                    <h2 style="margin-left: 30px;">{{campaign.name}}  |  Campaign</h2>
+                    <div class="card" v-for="sponsor in sponsors" v-if="sponsor.flag == 'True' ">
+                        <div class="card-body">
+                        <h2 style="margin-left: 30px;">{{sponsor.name}}  |  Sponsor</h2>
+                        </div>
                     </div>
-                </div>
-                <br>
+                    <br>
 
-                <div class="card" v-for="ad in ads" v-if="ad.flag == 'True' ">
-                    <div class="card-body">
-                    <h2 style="margin-left: 30px;">{{ad.camp_name}}  |  Ad</h2>
+                    <div class="card" v-for="influencer in influencers" v-if="influencer.flag == 'True' ">
+                        <div class="card-body">
+                        <h2 style="margin-left: 30px;">{{influencer.name}}  |  Influencer</h2>
+                        </div>
                     </div>
+                    <br>
+
+                    <div class="card" v-for="campaign in campaigns" v-if="campaign.flag == 'True' ">
+                        <div class="card-body">
+                        <h2 style="margin-left: 30px;">{{campaign.name}}  |  Campaign</h2>
+                        </div>
+                    </div>
+                    <br>
+
+                    <div class="card" v-for="ad in ads" v-if="ad.flag == 'True' ">
+                        <div class="card-body">
+                        <h2 style="margin-left: 30px;">{{ad.camp_name}}  |  Ad</h2>
+                        </div>
+                    </div>
+                    <br>
+
                 </div>
-                <br>
 
             </div>
 

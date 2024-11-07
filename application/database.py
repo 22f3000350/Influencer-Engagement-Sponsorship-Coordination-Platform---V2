@@ -29,6 +29,7 @@ class Sponsor(db.Model):
     budget=db.Column(db.Integer(),nullable=False)
     contact_info=db.Column(db.String(),nullable=False)
     flag=db.Column(db.String(),nullable=False)
+    approval=db.Column(db.String(),nullable=False)
     campaigns=db.relationship('Campaign',backref='sponsor')
 
 class Influencer(db.Model):

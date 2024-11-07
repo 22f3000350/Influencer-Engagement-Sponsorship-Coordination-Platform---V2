@@ -230,6 +230,7 @@ export default {
                     <h2 id="icon_text">Admin</h2>
                 </div>
                 <div>
+                    <router-link to="/admin/approval"><button id="flags">Approval</button></router-link>
                     <router-link to="/admin/flag"><button id="flags">Flags</button></router-link>
                     <a href="/"><button id="logout">Log Out</button></a>
                 </div>

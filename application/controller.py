@@ -21,7 +21,10 @@ def login():
             if user.roles[0].name == role:
                 if role=="sponsor":
                     sponsor = Sponsor.query.filter_by(name=user.username).first()
-                    return {"message":"ok","token":user.get_auth_token(),"role":role,"id":sponsor.id},201
+                    if sponsor.approval == "True":
+                        return {"message":"ok","token":user.get_auth_token(),"role":role,"id":sponsor.id},201
+                    else:
+                        return {"message":"Admin Approval is Needed"},201
                 elif role=="influencer":
                     influencer = Influencer.query.filter_by(name=user.username).first()
                     return {"message":"ok","token":user.get_auth_token(),"role":role,"id":influencer.id,"name":influencer.name},201
@@ -54,7 +57,7 @@ def sponsor_register():
 
         if user_name==None:
             app.security.datastore.create_user(email=email,username=username,password=hash_password(password),roles=['sponsor'])
-            sponsor=Sponsor(name=username,company=company,contact_info=contact_info,budget=budget,flag="False")
+            sponsor=Sponsor(name=username,company=company,contact_info=contact_info,budget=budget,flag="False",approval="False")
             db.session.add(sponsor)
             db.session.commit()
             return {"message":"ok"},201
