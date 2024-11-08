@@ -291,6 +291,53 @@ class Ad_Api(Resource):
         db.session.commit()
         return {"message":"ok"},200
 
+class Sponsor_Requests(Resource):
+    @auth_required('token')
+    @roles_required('sponsor')
+    def get(self,sponsor_id):
+        
+        requests=Request.query.filter_by(sponsor_id=sponsor_id).all()
+        data = []
+        for request in requests:
+            i={}
+            i['id']=request.id
+            i['ad_id']=request.ad_id
+            i['influencer_id']=request.influencer_id
+            i['name']=request.name
+            i['category']=request.category
+            i['niche']=request.niche
+            i['platform']=request.platform
+            i['followers']=request.followers
+            i['sponsor_id']=request.sponsor_id
+            data.append(i)
+
+        return data,200
+    
+    @auth_required('token')
+    @roles_required('sponsor')
+    def put(self,influencer_id,status,ad_id):
+
+        if status=='accept':
+            ad=Ad.query.filter_by(id=ad_id).first()
+            ad.influencer_id=influencer_id
+            requests=Request.query.filter_by(ad_id=ad_id).all()
+            for request in requests:
+                db.session.delete(request)
+            db.session.commit()
+            return {"message":"ok"},200
+        
+        elif status=='reject':
+            requests=Request.query.filter_by(ad_id=ad_id,influencer_id=influencer_id).all()
+            for request in requests:
+                db.session.delete(request)
+            requests=Request.query.filter_by(ad_id=ad_id).all()
+            if len(requests)==0:
+                ad=Ad.query.filter_by(id=ad_id).first()
+                ad.influencer_id=0
+            db.session.commit()
+            return {"message":"ok"},200
+
+
 
 class Sponsor_Filter(Resource):
     @auth_required('token')
@@ -533,6 +580,7 @@ api.add_resource(Influencer_Info,'/info/influencer')
 api.add_resource(Campaign_Info,'/info/campaign/<int:sponsor_id>')
 api.add_resource(Ad_Api,'/ad/<int:sponsor_id>/<type>/<int:influencer_id>','/ad/<int:sponsor_id>','/ad/<int:sponsor_id>/<int:ad_id>')
 api.add_resource(Sponsor_Filter,'/sponsor_filter')
+api.add_resource(Sponsor_Requests,'/sponsor_requests/<int:sponsor_id>','/sponsor_requests/<int:influencer_id>/<status>/<int:ad_id>')
 api.add_resource(Influencer_Edit,'/influencer/edit/<int:influencer_id>')
 api.add_resource(Influencer_Campaigns,'/influencer/campaigns','/influencer/campaigns/<int:influencer_id>/<int:ad_id>')
 api.add_resource(Influencer_Requests,'/influencer/requests/<int:influencer_id>','/influencer/requests/<int:ad_id>/<type>','/influencer/requests/<int:ad_id>')

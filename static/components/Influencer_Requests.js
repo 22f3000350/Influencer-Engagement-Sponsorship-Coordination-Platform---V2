@@ -90,15 +90,6 @@ export default {
 
                     <p style="margin-top: 10px;margin-left: 20px;font-size: large;">{{ad.requirements}}</p>
                     
-                    <div style="width: 250px;height: 40px;margin-left: 40px;margin-top: 20px;">
-                        <form>
-                            <div class="mb-3">
-                                <input type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Amount" v-model="negotiate_amount">
-                            </div>
-                            <button class="btn btn-primary" style="width: 200px;height: 45px;margin-left: 20px;" @click="negotiate" >Negotiate</button>
-                        </form>
-                    </div>
-
                     <div style="margin-top: 80px;border-top: 1px solid rgb(157, 160, 165);">
 
                         <button type="button" class="btn btn-success" style="margin-left: 60px;margin-top:20px;width: 200px;height: 45px;" @click.prevent="accept(ad.id)">Accept</button>
