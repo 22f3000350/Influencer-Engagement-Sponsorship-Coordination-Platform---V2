@@ -75,3 +75,9 @@ class Request(db.Model):
     platform=db.Column(db.String(),nullable=False)
     followers=db.Column(db.String(),nullable=False)
     sponsor_id=db.Column(db.Integer(),db.ForeignKey('sponsor.id'),nullable=False)
+
+class DailyVisit(db.Model):
+    id = db.Column(db.Integer(),primary_key=True,autoincrement=True)
+    user_id = db.Column(db.Integer(), db.ForeignKey('user.id'))
+    date = db.Column(db.Date)
+    user = db.relationship('User', backref='visits')

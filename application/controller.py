@@ -2,6 +2,18 @@ from flask import render_template, request
 from flask import current_app as app
 from .database import *
 from flask_security import hash_password, verify_password
+from datetime import datetime
+
+
+def log_user_visits(current_user):
+    if current_user is not None and "influencer" in current_user.roles:
+        visited = DailyVisit.query.filter_by(user_id=current_user.id,
+                                             date=datetime.today().strftime('%Y-%m-%d')).count()
+        if visited == 0:
+            vs = DailyVisit(user_id=current_user.id, date=datetime.today())
+            db.session.add(vs)
+            db.session.commit()
+
 
 @app.get('/')
 def index():
@@ -27,6 +39,7 @@ def login():
                         return {"message":"Admin Approval is Needed"},201
                 elif role=="influencer":
                     influencer = Influencer.query.filter_by(name=user.username).first()
+                    log_user_visits(user)
                     return {"message":"ok","token":user.get_auth_token(),"role":role,"id":influencer.id,"name":influencer.name},201
                 elif role=="admin":
                     return {"message":"ok","token":user.get_auth_token(),"role":role},201
