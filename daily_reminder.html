@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Reminder</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            background-color: #ffffff;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            font-size: 26px;
+            color: #333;
+            text-align: center;
+        }
+        .message {
+            font-size: 16px;
+            margin-top: 10px;
+        }
+        .ad-list {
+            margin-top: 15px;
+            padding-left: 0;
+            list-style: none;
+        }
+        .ad-item {
+            margin: 15px 0;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+        }
+        .ad-item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .ad-number {
+            font-weight: bold;
+            font-size: 18px;
+            color: #4CAF50;
+        }
+        .campaign-name {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+        }
+        .ad-details {
+            margin-top: 10px;
+            font-size: 14px;
+        }
+        .button {
+            display: block;
+            width: fit-content;
+            margin: 20px auto 0;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: #fff;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Daily Reminder</h1>
+    <p class="message">Hi {{ name }},</p>
+
+    {% if daily_visit == 0 %}
+        <p class="message">It looks like you haven't visited the app today. Don't miss out on your daily streak!</p>
+    {% endif %}
+
+    {% if ads %}
+        <p class="message">You have the following pending ad requests:</p>
+        <ul class="ad-list">
+            {% for ad in ads %}
+                <li class="ad-item">
+                    <div class="ad-item-header">
+                        <span class="ad-number">Ad {{ loop.index }}</span>
+                        <span class="campaign-name">{{ ad.camp_name }}</span>
+                    </div>
+                    <div class="ad-details">
+                        <p><strong>Requirements:</strong> {{ ad.requirements }}</p>
+                        <p><strong>Payment Amount:</strong> {{ ad.payment_amount }}</p>
+                        <p><strong>Status:</strong> {{ ad.status }}</p>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p class="message">You have no pending ad requests at the moment.</p>
+    {% endif %}
+
+    <p class="message">Visit the app to check out new opportunities or to keep your streak going!</p>
+    <a href="http://localhost:5000" class="button">Visit Now</a>
+</div>
+
+</body>
+</html>

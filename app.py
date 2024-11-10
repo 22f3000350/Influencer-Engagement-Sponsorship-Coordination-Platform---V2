@@ -33,7 +33,9 @@ from application.controller import *
 @celery_app.on_after_configure.connect
 def setup_periodic_tasks(sender, **kwargs):
     
-    sender.add_periodic_task(10.0, daily_reminder.s(), name='add every 10')
+    sender.add_periodic_task(300.0, daily_reminder.s(), name='add every 300')
+
+    sender.add_periodic_task(30.0, monthly_report.s(), name='add every 300')
 
 
 if __name__=='__main__':
