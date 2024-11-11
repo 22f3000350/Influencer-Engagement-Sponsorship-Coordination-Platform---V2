@@ -4,6 +4,7 @@ from .mail_service import send_message
 from .database import *
 from jinja2 import Template
 from datetime import datetime, timedelta
+import random
 
 @shared_task(ignore_result=True)
 def daily_reminder():
@@ -38,3 +39,16 @@ def monthly_report():
                          template.render(name=sponsor.name,campaigns=campaigns,ads=ads))
             
     return "OK"
+
+@shared_task(ignore_result=True)
+def export_csv(sponsor_id):
+    campaigns = Campaign.query.filter_by(sponsor_id=sponsor_id).all()
+
+    csv = excel.make_response_from_query_sets(campaigns,['id','name','description','start_date','end_date','budget','type','category','flag','sponsor_id'],'csv')
+
+    filename = str(sponsor_id) + '_' + str(random.randint(1, 10000000)) + '.csv'
+
+    with open(f'../CSV/{filename}','wb') as file:
+        file.write(csv.data)
+
+    return filename

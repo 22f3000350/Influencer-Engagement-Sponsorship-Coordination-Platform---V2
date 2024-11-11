@@ -10,4 +10,9 @@ class LocalDevelopmentConfig(Config):
     SECURITY_PASSWORD_SALT = 'Mad-2-Project'
     WTF_CSRF_ENABLED = False
     SECURITY_TOKEN_AUTHENTICATION_HEADER = 'Authentication-Token'
+    CACHE_TYPE = "RedisCache"
+    CACHE_DEFAULT_TIMEOUT = 5
+    CACHE_KEY_PREFIX = "cache_prefix"
+    CACHE_REDIS_URL = "redis://localhost:6379/2"
+
       

@@ -2,8 +2,11 @@ from flask_restful import Api,Resource
 from .database import *
 from flask import request, jsonify
 from flask_security import auth_required,roles_required,roles_accepted
+from flask_caching import Cache
 
 api = Api()
+
+cache = Cache()
 
 class Admin_Approval(Resource):
     @auth_required('token')

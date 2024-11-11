@@ -1,11 +1,29 @@
 export default {
     props:['sponsor_id','home','requests','new_ad','update_ad','delete_ad','new_campaign','update_campaign','delete_campaign'],
+    methods:{
+        export:function(){
+            fetch('http://127.0.0.1:5000/campaign/'+this.sponsor_id,{
+                headers:{
+                    'Authentication-Token': localStorage.getItem('token')
+                }
+            })
+            .then((res) => {
+                return res.json()
+            })
+            .then((data) => {
+                if(data.message  == "ok"){
+                    alert("Exported the CSV Successfully")
+                }
+            })
+        }
+    },
     template:`
         <div>
              <div id="sponsor_header">
                 <div id="icon">
                     <h1 id="icon_text">Sponsor</h1>
                 </div>
+                <button id="logout" style="margin-right:25px;">Export CSV</button>
                 <router-link to="/"><button id="logout">Log Out</button></router-link>
             </div>
             <div id="sponsor_sidebar">

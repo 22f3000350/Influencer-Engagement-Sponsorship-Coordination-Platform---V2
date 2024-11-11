@@ -7,15 +7,19 @@ from flask_security import Security,SQLAlchemyUserDatastore,hash_password
 from application.worker import celery_init_app
 from application.tasks import *
 from celery.schedules import crontab
+import flask_excel as excel
+
 
 app = Flask(__name__)
 cors = CORS(app)
 app.config.from_object(LocalDevelopmentConfig)
 db.init_app(app)
 api.init_app(app)
+cache.init_app(app)
 datastore=SQLAlchemyUserDatastore(db,User,Role)
 app.security=Security(app,datastore)
 celery_app = celery_init_app(app)
+excel.init_excel(app)
 app.app_context().push()
 
 with app.app_context():
