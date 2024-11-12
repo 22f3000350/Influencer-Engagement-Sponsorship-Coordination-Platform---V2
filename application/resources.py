@@ -61,6 +61,7 @@ class Admin_Flag(Resource):
 class Sponsor_Info(Resource):
     @auth_required('token')
     @roles_required('admin')
+    @cache.cached(timeout=10)
     def get(self):
         sponsors = Sponsor.query.all()
         data = []
@@ -79,6 +80,7 @@ class Sponsor_Info(Resource):
 class Campaign_Info(Resource):
     @auth_required('token')
     @roles_accepted('sponsor','admin')
+    @cache.cached(timeout=10)
     def get(self,sponsor_id):
 
         if sponsor_id==20000:
@@ -108,6 +110,7 @@ class Campaign_Info(Resource):
 class Influencer_Info(Resource):
     @auth_required('token')
     @roles_accepted('sponsor','admin')
+    @cache.cached(timeout=10)
     def get(self):
         influencers = Influencer.query.all()
         data = []
@@ -127,6 +130,7 @@ class Influencer_Info(Resource):
 class Campaign_Api(Resource):
     @auth_required('token')
     @roles_required('sponsor')
+    @cache.cached(timeout=10)
     def get(self,sponsor_id):
         sponsor=Sponsor.query.filter_by(id=sponsor_id).first()
         campaigns=sponsor.campaigns
@@ -210,6 +214,7 @@ class Campaign_Api(Resource):
 class Ad_Api(Resource):
     @auth_required('token')
     @roles_accepted('sponsor','admin')
+    @cache.cached(timeout=10)
     def get(self,sponsor_id):
 
         if sponsor_id==20000:            
@@ -559,6 +564,7 @@ class Influencer_Requests(Resource):
 class Influencer_Status(Resource):
     @auth_required('token')
     @roles_required('influencer')
+    @cache.cached(timeout=10)
     def get(self,influencer_id):
         ads=Ad.query.filter_by(influencer_id=influencer_id).all()
         data = []

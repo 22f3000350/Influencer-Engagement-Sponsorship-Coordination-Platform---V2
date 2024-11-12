@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, send_file
 from flask_cors import CORS
 from config import LocalDevelopmentConfig
 from application.database import *
@@ -8,7 +8,6 @@ from application.worker import celery_init_app
 from application.tasks import *
 from celery.schedules import crontab
 import flask_excel as excel
-
 
 app = Flask(__name__)
 cors = CORS(app)
@@ -32,14 +31,40 @@ with app.app_context():
     
     db.session.commit()
 
+@celery_app.task
+def export_csv(sponsor_id):
+    campaigns = Campaign.query.filter_by(sponsor_id=sponsor_id).all()
+
+    csv = excel.make_response_from_query_sets(campaigns,['id','name','description','start_date','end_date','budget','type','category','flag','sponsor_id'],'csv')
+
+    filename = str(sponsor_id) + '_' + str(random.randint(1, 10000000)) + '.csv'
+
+    with open(f'./CSV/{filename}','wb') as file:
+        file.write(csv.data)
+
+    return filename
+
 from application.controller import *
+
+@app.route('/export_csv/<sponsor_id>')
+def create_csv(sponsor_id):
+    
+    task = export_csv.delay(sponsor_id)
+
+    while not(task.ready()):
+
+        if task.ready():
+            file_path = './CSV/' + task.result
+            return send_file(file_path, as_attachment=True, download_name=f"sponsor_{sponsor_id}_report.csv")
+        
+    return {"error": "File not found"}, 404
 
 @celery_app.on_after_configure.connect
 def setup_periodic_tasks(sender, **kwargs):
     
-    sender.add_periodic_task(300.0, daily_reminder.s(), name='add every 300')
+    sender.add_periodic_task(crontab(hour=18, minute=30), daily_reminder.s(), name="Daily Reminder")
 
-    sender.add_periodic_task(30.0, monthly_report.s(), name='add every 300')
+    sender.add_periodic_task(crontab(minute=35, hour=18, day_of_month='1'), monthly_report.s(), name='Monthly Report')
 
 
 if __name__=='__main__':

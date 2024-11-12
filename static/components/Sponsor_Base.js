@@ -1,20 +1,35 @@
 export default {
     props:['sponsor_id','home','requests','new_ad','update_ad','delete_ad','new_campaign','update_campaign','delete_campaign'],
     methods:{
-        export:function(){
-            fetch('http://127.0.0.1:5000/campaign/'+this.sponsor_id,{
+        export_csv:function(){
+            fetch('http://127.0.0.1:5000/export_csv/'+this.sponsor_id,{
                 headers:{
                     'Authentication-Token': localStorage.getItem('token')
                 }
             })
-            .then((res) => {
-                return res.json()
-            })
-            .then((data) => {
-                if(data.message  == "ok"){
-                    alert("Exported the CSV Successfully")
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
                 }
+                return response.blob();  
             })
+            .then(blob => {
+              
+                const url = window.URL.createObjectURL(blob);
+                
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `sponsor_${this.sponsor_id}_report.csv`; 
+                document.body.appendChild(a);
+                a.click();  
+                a.remove();  
+                
+                window.URL.revokeObjectURL(url);
+            })
+            .catch(error => {
+                console.error('There was a problem with the download:', error);
+                alert('Failed to download file');
+            });
         }
     },
     template:`
@@ -23,7 +38,7 @@ export default {
                 <div id="icon">
                     <h1 id="icon_text">Sponsor</h1>
                 </div>
-                <button id="logout" style="margin-right:25px;">Export CSV</button>
+                <button id="logout" style="margin-right:25px;" @click="export_csv">Export CSV</button>
                 <router-link to="/"><button id="logout">Log Out</button></router-link>
             </div>
             <div id="sponsor_sidebar">
