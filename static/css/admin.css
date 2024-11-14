@@ -1,6 +1,6 @@
 #admin_header{
     border: 1px solid rgba(211, 219, 227, 0.882) ;
-    width: 1708px ;
+    width: 1738px ;
     height: 70px;
     position: relative;
     right: 1px;
@@ -18,7 +18,7 @@
     border-radius: 6px;
     position: relative;
     left: 1340px;
-    bottom: 40px;
+    bottom: 50px;
 }
 
 #flags{
@@ -31,7 +31,7 @@
     border-radius: 2px;
     position: relative;
     left: 1300px;
-    bottom: 40px;
+    bottom: 50px;
 
 }
 

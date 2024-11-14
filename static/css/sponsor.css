@@ -1,6 +1,6 @@
 #sponsor_header{
     border: 1px solid rgba(211, 219, 227, 0.882) ;
-    width: 1700px ;
+    width: 1750px ;
     height: 70px;
     position: relative;
     right: 7px;
@@ -17,8 +17,8 @@
 
 #sponsor_main{
     background-color: #ebf0f8;
-    width: 1383px;
-    height: 719px;
+    width: 1440px;
+    height: 1959px;
     position: relative;
     left: 295px;
     bottom: 730px;
@@ -51,7 +51,7 @@
     border-radius: 6px;
     position: relative;
     left: 1520px;
-    bottom: 48px;
+    bottom: 68px;
 }
 
 #logout:hover{
@@ -67,8 +67,8 @@
     border-radius: 10px;
     width: 240px;
     height: 45px;
-    margin: 14px;
-    margin-left: 30px;
+    margin: 10px;
+    margin-left: 45px;
 }
 
 .side_heading{
@@ -133,8 +133,8 @@
 #update_campaign_table{
     background-color: white;
     margin-top: 50px;
-    height: 550px;
-    width: 1377px;
+    height: 580px;
+    width: 1440px;
     margin-left: 2px;
     overflow-y: auto;
 }
@@ -245,8 +245,8 @@ td{
     border-radius: 10px;
     position: relative;
     bottom: 460px;
-    left: 760px;
-    width: 600px;
+    left: 790px;
+    width: 630px;
     height: 450px;
     padding: 0px;
     overflow-y: auto;
@@ -266,7 +266,7 @@ td{
 }
 
 #home_campaign_content{
-    width: 570px;
+    width: 590px;
     height: 420px;
     position: relative;
     top: 15px;
@@ -285,7 +285,7 @@ td{
     width: 300px;
     height: 80px;
     position: relative;
-    left: 860px;
+    left: 750px;
     bottom: 100px;
 
 }
@@ -296,7 +296,7 @@ td{
     width: 150px;
     height: 45px;
     position: relative;
-    left: 310px;
+    left: 500px;
     bottom: 48px;
 }
 

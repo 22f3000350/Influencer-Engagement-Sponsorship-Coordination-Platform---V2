@@ -30,19 +30,6 @@ export default {
             this.ads = data
         })
     },
-    beforeUpdate(){
-        fetch('http://127.0.0.1:5000/ad/'+this.id,{
-            headers:{
-                'Authentication-Token': localStorage.getItem('token')
-            }
-        })
-        .then((res) => {
-            return res.json()
-        })
-        .then((data) => {
-            this.ads = data
-        })
-    },
     methods:{
         change:function(a_id,c_name){
             this.type='update';

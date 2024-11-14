@@ -64,7 +64,7 @@ def setup_periodic_tasks(sender, **kwargs):
     
     sender.add_periodic_task(crontab(hour=18, minute=30), daily_reminder.s(), name="Daily Reminder")
 
-    sender.add_periodic_task(crontab(minute=35, hour=18, day_of_month='1'), monthly_report.s(), name='Monthly Report')
+    sender.add_periodic_task(crontab(hour=18, minute=31, day_of_month='1'), monthly_report.s(), name='Monthly Report')
 
 
 if __name__=='__main__':

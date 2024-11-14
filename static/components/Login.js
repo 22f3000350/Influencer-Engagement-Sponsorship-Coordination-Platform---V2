@@ -90,10 +90,10 @@ export default {
                 </form>
                 <br><br>
                 <div v-if="type === 'sponsor'">
-                    <span><b>Don't have an account? </b><router-link to="/sponsor_register">Register Now</router-link></span>
+                    <span id="span"><b>Don't have an account? </b><router-link to="/sponsor_register">Register Now</router-link></span>
                 </div>
                 <div v-if="type === 'influencer'">
-                    <span><b>Don't have an account? </b><router-link to="/influencer_register">Register Now</router-link></span>
+                    <span id="span"><b>Don't have an account? </b><router-link to="/influencer_register">Register Now</router-link></span>
                 </div>
 
             </div>

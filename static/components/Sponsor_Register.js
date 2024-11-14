@@ -99,7 +99,7 @@ export default {
                     <button id="login_btn" @click="register">Register</button>
                 </form>
                 <br><br>
-                <span><b>Already have an account? </b><router-link to="/login/sponsor">Login Now</router-link></span>
+                <span id="span"><b>Already have an account? </b><router-link to="/login/sponsor">Login Now</router-link></span>
             </div>
 
             </div>

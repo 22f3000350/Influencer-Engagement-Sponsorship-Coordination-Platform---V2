@@ -100,7 +100,7 @@ export default {
 
             </div>
 
-            <div id="update_campaign_table">
+            <div id="update_campaign_table" style="position: relative;bottom: 470px;">
 
                 <div class="table-responsive scrollbar" id="campaign_table">
 

@@ -154,13 +154,15 @@ export default {
                             
                                 <div class="mb-3">
                                     <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" style="height: 50px;" placeholder="Search Influencer" v-model="find.search">
-                                    <button class="btn btn-primary" id="sponsor_search" @click="filter" >Search</button>
+                                    <button class="btn btn-primary" id="sponsor_search" @click="filter">Search</button>
                                 </div>
                             </form>
                         </div>
                 </div>
 
-                    <div class="new_ad_card" v-for="influencer in influencers" v-if="!form">
+                <div id="new_ad_content" v-if="!form">
+
+                    <div class="new_ad_card" v-for="influencer in influencers">
                 
                             <img src="/static/images/profile image.jpg" width="200px" style="margin-left: 37px;margin-top: 15px;">
 
@@ -177,6 +179,8 @@ export default {
                         <button id="new_ad_request_button" @click="form = true; influencer_id = influencer.id">Request</button>
         
                     </div>
+                
+                </div>
                     
 
                     <div id="new_ad_form" v-if="form">
@@ -191,7 +195,7 @@ export default {
                                 </div>
 
                             <div class="col">
-                                <input type="text" class="form-control" placeholder="Payment Amount" aria-label="Last name" style="height: 50px;width: 220px;" v-model="ad.payment_amount" required>
+                                <input type="number" class="form-control" placeholder="Payment Amount" aria-label="Last name" style="height: 50px;width: 220px;" v-model="ad.payment_amount" required>
                             </div>
                             </div>
 
@@ -230,7 +234,7 @@ export default {
                                 </div>
 
                             <div class="col">
-                                <input type="text" class="form-control" placeholder="Payment Amount" aria-label="Last name" style="height: 50px;width: 220px;" v-model="ad.payment_amount" required>
+                                <input type="number" class="form-control" placeholder="Payment Amount" aria-label="Last name" style="height: 50px;width: 220px;" v-model="ad.payment_amount" required>
                             </div>
                             </div>
 

@@ -351,7 +351,7 @@ export default {
 
             <div id="admin_ad_table">
 
-                <div id="home_campaign_content" style="margin: 20px;">
+                <div id="home_campaign_content" style="margin: 20px; width:800px;">
 
                     <table class="table">
                         <thead>

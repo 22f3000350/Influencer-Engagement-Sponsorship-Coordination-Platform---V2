@@ -38,8 +38,10 @@ export default {
                 <div id="icon">
                     <h1 id="icon_text">Sponsor</h1>
                 </div>
-                <button id="logout" style="margin-right:25px;" @click="export_csv">Export CSV</button>
-                <router-link to="/"><button id="logout">Log Out</button></router-link>
+                <div style="margin-left:75px;">
+                    <button id="logout" style="margin-right:25px;" @click="export_csv">Export CSV</button>
+                    <router-link to="/"><button id="logout">Log Out</button></router-link>
+                </div>
             </div>
             <div id="sponsor_sidebar">
                 <router-link :to="'/sponsor/home/'+sponsor_id"><button class="button" :style="home" >Home</button></router-link>

@@ -32,19 +32,6 @@ export default {
             this.campaigns = data
         })
     },
-    beforeUpdate(){
-        fetch('http://127.0.0.1:5000/campaign/'+this.id,{
-            headers:{
-                'Authentication-Token': localStorage.getItem('token')
-            }
-        })
-        .then((res) => {
-            return res.json()
-        })
-        .then((data) => {
-            this.campaigns = data
-        })
-    },
     methods:{
         change:function(camp_id){
             this.type='update';
