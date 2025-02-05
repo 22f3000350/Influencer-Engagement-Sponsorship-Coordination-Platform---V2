@@ -1,6 +1,6 @@
 # Project Statement
 
-## Influencer Engagement & Sponsorship Coordination Platform - V2
+## Influencer Engagement & Sponsorship Coordination Platform
 This platform connects sponsors and influencers, enabling sponsors to advertise their products/services while allowing influencers to gain monetary benefits.
 
 ## Frameworks to be Used
