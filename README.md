@@ -16,4 +16,4 @@ The project must be built using the following mandatory frameworks:
 - **Redis and Celery** for batch jobs
 
 ## Demonstration Video
-Watch the demonstration video [here](YOUR_VIDEO_LINK_HERE).
+Watch the demonstration video [here](https://drive.google.com/file/d/13-9yOlRqSYdw4wO9weNUlUAPxKlj_5O1/view).
