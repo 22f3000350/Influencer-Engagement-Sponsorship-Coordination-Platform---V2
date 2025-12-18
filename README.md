@@ -6,12 +6,12 @@ This platform connects sponsors and influencers, enabling sponsors to advertise 
 ## Frameworks to be Used
 The project must be built using the following mandatory frameworks:
 
-- **SQLite** for data storage (No other database is allowed)
+- **SQLite** for data storage 
 - **Flask** for API development
 - **VueJS** for UI
-- **VueJS Advanced with CLI** (Only if required, not necessary)
-- **Jinja2 templates** (If required, but not to be used for UI)
-- **Bootstrap** for HTML generation and styling (No other CSS framework is allowed)
+- **VueJS Advanced with CLI** 
+- **Jinja2 templates** 
+- **Bootstrap** for HTML generation and styling 
 - **Redis** for caching
 - **Redis and Celery** for batch jobs
 
